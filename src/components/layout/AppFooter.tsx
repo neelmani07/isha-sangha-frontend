@@ -10,7 +10,7 @@ const columns = [
     links: [
       { to: '/', label: 'The globe' },
       { to: '/nearby', label: 'Near me' },
-      { to: '/teachers', label: 'Teachers' },
+      { to: '/teachers', label: 'Hatha yoga teachers' },
       { to: '/centers', label: 'Centres' },
     ],
   },
@@ -20,7 +20,7 @@ const columns = [
       { to: '/stories', label: 'Stories' },
       { to: '/initiatives', label: 'Initiatives' },
       { to: '/resources', label: 'Resources' },
-      { to: '/shop', label: 'Sangha Shop' },
+      { to: '/shop', label: "Volunteers' Shop" },
       { to: '/join', label: 'Join the map' },
       { to: '/donate', label: 'Donate' },
       { to: '/feedback', label: 'Feedback' },

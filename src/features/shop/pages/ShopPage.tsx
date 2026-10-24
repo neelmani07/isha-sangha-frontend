@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { ClosingBand } from '../../../components/layout/ClosingBand';
 import { BackdropPhoto } from '../../../components/ui/BackdropPhoto';
 import { TwoToneHeading } from '../../../components/ui/TwoToneHeading';
+import { shopName } from '../../../content/copy';
 import { sitePhotos } from '../../../content/sitePhotos';
 import type { ShopCategory } from '../../../types/api';
 import { shopApi, shopCategoryLabel, shopRules } from '../api/shopApi';
@@ -31,14 +32,14 @@ export function ShopPage() {
   return (
     <main className="font-body text-ink">
       <section className="relative isolate overflow-hidden bg-maroon-dark pt-[var(--header-h)] text-cream">
-        <BackdropPhoto photo={sitePhotos.velliangiriTridents} variant="fade-right" position="center 40%" className="-z-10 opacity-60" />
+        <BackdropPhoto photo={sitePhotos.trimurti} variant="fade-right" position="center 55%" className="-z-10 opacity-75" />
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-maroon-dark via-maroon-dark/80 to-transparent" />
         <div className="mx-auto max-w-6xl px-4 pb-16 pt-14 sm:px-6 sm:pt-24 lg:px-8">
           <div className="max-w-xl">
-            <TwoToneHeading as="h1" size="lg" tone="light" title="Sangha Shop" subtitle="made, grown and shared by meditators" />
+            <TwoToneHeading as="h1" size="lg" tone="light" title={shopName.title} subtitle={shopName.subtitle} />
             <p className="mt-6 text-lg leading-relaxed text-cream/80">
-              Cold-pressed oils, millets, hand-printed cloth, books and more, from volunteers in the community. Contact the
-              seller directly to buy.
+              Cold-pressed oils, millets, hand-printed cloth, books and more, made by volunteers across the sangha. Contact
+              the seller directly to buy.
             </p>
             <div className="mt-8">
               <SellLink />
@@ -95,8 +96,10 @@ export function ShopPage() {
       </section>
 
       <ClosingBand
-        photo={sitePhotos.velliangiriMist}
-        photoPosition="center 60%"
+        photo={sitePhotos.yogiNaga}
+        photoSide="right"
+        photoPosition="10% 22%"
+        photoOpacity="opacity-45"
         title="Something to share?"
         subtitle="the sangha would love to know"
         text="If you grow, cook, stitch or write something with care, list it here. Buyers will reach you directly."

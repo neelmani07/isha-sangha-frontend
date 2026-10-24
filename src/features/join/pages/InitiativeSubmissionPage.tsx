@@ -104,8 +104,8 @@ export function InitiativeSubmissionPage() {
 
   return (
     <JoinLayout
-      title={editingId ? 'Update your initiative' : 'List your initiative'}
-      subtitle="and let the sangha find you"
+      title={editingId ? 'Update your listing' : 'List your campaign or venture'}
+      subtitle="and gather support from the sangha"
       intro="Seva, a class, a venture: tell people what you're building and what would help. A volunteer reviews every listing before it appears."
     >
       {existing.data?.status === 'REJECTED' && <RejectionNotice reason={existing.data.rejectionReason} />}

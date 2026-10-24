@@ -42,7 +42,7 @@ export function priceText(item: Pick<ShopListing, 'priceAmount' | 'priceNote' | 
 
 /** Ways to reach the seller, most direct first. */
 export function sellerLinks(item: ShopListing) {
-  const message = encodeURIComponent(`Namaskaram! I saw "${item.title}" on the Isha Sangha shop and would like to know more.`);
+  const message = encodeURIComponent(`Namaskaram! I saw "${item.title}" in the Volunteers' Shop on Isha Sangha and would like to know more.`);
   return [
     item.contactWhatsapp && { key: 'whatsapp', label: 'WhatsApp', href: `https://wa.me/${item.contactWhatsapp}?text=${message}` },
     item.contactPhone && { key: 'phone', label: 'Call', href: `tel:${item.contactPhone.replace(/[^\d+]/g, '')}` },

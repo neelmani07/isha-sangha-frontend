@@ -67,7 +67,7 @@ export function DonatePage() {
   return (
     <main className="font-body text-ink">
       <section className="relative isolate overflow-hidden bg-maroon-texture pt-[var(--header-h)] text-cream clip-slant-bottom">
-        <BackdropPhoto photo={sitePhotos.adiyogiWide} variant="fade-left" position="center 35%" className="-z-10 opacity-30 mix-blend-luminosity" />
+        <BackdropPhoto photo={sitePhotos.ashramVelliangiri} variant="fade-left" position="center 40%" className="-z-10 opacity-35 mix-blend-luminosity" />
         <div className="mx-auto grid max-w-6xl gap-12 px-4 pb-28 pt-14 sm:px-6 sm:pt-20 lg:grid-cols-[1fr_420px] lg:px-8">
           <div className="lg:pt-8">
             <TwoToneHeading

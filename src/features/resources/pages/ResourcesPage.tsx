@@ -32,7 +32,7 @@ export function ResourcesPage() {
   return (
     <main className="font-body text-ink">
       <section className="relative isolate overflow-hidden bg-ink pt-[var(--header-h)] text-cream">
-        <BackdropPhoto photo={sitePhotos.velliangiriTridents} variant="fade-right" className="-z-10 opacity-35 mix-blend-luminosity" />
+        <BackdropPhoto photo={sitePhotos.spandaHall} variant="fade-right" position="center 45%" className="-z-10 opacity-40 mix-blend-luminosity" />
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-ink via-ink/80 to-transparent" />
         <div className="mx-auto max-w-6xl px-4 pb-16 pt-14 sm:px-6 sm:pt-20 lg:px-8">
           <div className="max-w-xl">

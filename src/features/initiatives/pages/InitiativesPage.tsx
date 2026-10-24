@@ -19,7 +19,7 @@ function ListInitiativeLink({ className = '' }: { className?: string }) {
       to="/join/initiative"
       className={`inline-flex items-center gap-2 rounded-md bg-saffron px-5 py-3 text-sm font-semibold text-cream shadow-card transition hover:bg-saffron-dark ${className}`}
     >
-      <PenLine size={16} /> List your initiative
+      <PenLine size={16} /> List your campaign or venture
     </Link>
   );
 }
@@ -64,11 +64,11 @@ export function InitiativesPage() {
               size="lg"
               tone="light"
               title="Your Initiatives"
-              subtitle="seva and ventures started by people like you"
+              subtitle="campaigns and ventures started by volunteers"
             />
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-cream/80">
-              Volunteers share what they are building, from free yoga in the park to seed libraries and evening tuition,
-              and what kind of support would help.
+              List your campaigns and ventures and gather support. Volunteers share what they are building, from free
+              yoga in the park to seed libraries and evening tuition, and what would help it grow.
             </p>
             <div className="mt-8">
               <ListInitiativeLink />

@@ -34,7 +34,7 @@ export function TeacherPage() {
       <DetailPageLayout
         title="Teacher not found"
         description="We couldn’t find this teacher on the map."
-        breadcrumbs={[{ label: nav.explore, to: '/' }, { label: 'Teachers', to: '/teachers' }, { label: 'Not found' }]}
+        breadcrumbs={[{ label: nav.explore, to: '/' }, { label: nav.teachers, to: '/teachers' }, { label: 'Not found' }]}
       >
         <EmptyState message="Try searching for another teacher, or go back to Explore." />
       </DetailPageLayout>
@@ -53,7 +53,7 @@ export function TeacherPage() {
       heroImageUrl={data.photoUrl}
       breadcrumbs={[
         { label: nav.explore, to: '/' },
-        { label: 'Teachers', to: '/teachers' },
+        { label: nav.teachers, to: '/teachers' },
         { label: data.cityName, to: `/search?q=${encodeURIComponent(data.cityName)}` },
         { label: data.name },
       ]}

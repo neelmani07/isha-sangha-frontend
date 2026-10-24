@@ -64,6 +64,13 @@ export const teachingModeLabel: Record<TeachingMode, string> = {
   BOTH: 'In person and online',
 };
 
+/** The volunteers' marketplace. Change the name here and it changes everywhere. */
+export const shopName = {
+  title: "Volunteers' Shop",
+  subtitle: 'made, grown and shared by volunteers',
+  short: 'Shop',
+};
+
 /** Navigation and account labels. */
 export const nav = {
   explore: 'Explore',
@@ -78,7 +85,7 @@ export const nav = {
   signOut: 'Sign out',
   feedback: 'Feedback',
   nearMe: 'Near me',
-  teachers: 'Teachers',
+  teachers: 'Hatha yoga teachers',
   centres: 'Centres',
   search: 'Search',
 };
@@ -87,13 +94,13 @@ export const nav = {
 export const pages = {
   explore: {
     eyebrow: 'Discover',
-    title: 'Find Isha',
+    title: 'Find Sangha',
     subtitle: 'wherever you are',
     intro: 'Centres, teachers, Devi temples and fellow meditators across the world, and the stories that connect them.',
     searchPlaceholder: 'Search cities, centres, teachers',
     nearMe: {
       eyebrow: 'Near me',
-      title: 'Find Isha near you',
+      title: 'Find Sangha near you',
       subtitle: 'teachers, centres and temples close by',
       join: 'Add yourself to the map',
     },
@@ -102,12 +109,12 @@ export const pages = {
       title: 'Look up a place or a person',
       subtitle: 'across every country, city and centre',
       placeholder: 'Try “Coimbatore”, “Mumbai” or a teacher’s name',
-      teachers: { title: 'All teachers', text: 'Isha Hatha Yoga teachers and the programmes they offer.' },
+      teachers: { title: 'All Hatha yoga teachers', text: 'Isha Hatha Yoga teachers and the programmes they offer.' },
       centres: { title: 'All centres', text: 'Isha centres, ashrams, Devi temples and Isha shops.' },
       search: { title: 'Search everything', text: 'Every country, state, city, centre and teacher.' },
     },
     stories: { eyebrow: 'From the sangha', title: 'Stories from these places', subtitle: 'grace, change and the magic of Devi' },
-    initiatives: { eyebrow: 'Your initiatives', title: 'Seva that started with one person', subtitle: 'and grew with the sangha' },
+    initiatives: { eyebrow: 'Initiatives', title: 'Campaigns that started with one person', subtitle: 'and grew with the sangha' },
     donate: {
       title: 'Your contribution',
       subtitle: "can change someone's life",
@@ -123,7 +130,7 @@ export const pages = {
     noResults: 'Nothing found. Try another spelling or a nearby city.',
   },
   teachers: {
-    title: 'Teachers',
+    title: 'Hatha yoga teachers',
     description: 'Isha Hatha Yoga teachers around the world, and the programmes they offer.',
   },
   centres: {
