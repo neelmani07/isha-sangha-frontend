@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" fill="none">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#d4e8f5"/>
+      <stop offset="100%" stop-color="#f0ebe3"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#sky)"/>
+  <!-- distant hills -->
+  <path d="M0 620 C200 520 380 560 560 500 C740 440 920 520 1100 480 C1280 440 1450 500 1600 460 L1600 900 L0 900 Z" fill="#c8d8c4" opacity="0.55"/>
+  <path d="M0 680 C240 600 420 640 640 590 C860 540 1040 610 1240 570 C1400 540 1520 590 1600 570 L1600 900 L0 900 Z" fill="#a8bca0" opacity="0.65"/>
+  <!-- ashram / temple silhouette -->
+  <path d="M760 420 L800 300 L840 420 Z" fill="#8a9a82" opacity="0.7"/>
+  <rect x="772" y="420" width="56" height="90" fill="#8a9a82" opacity="0.7"/>
+  <path d="M748 510 H852 V530 H748 Z" fill="#8a9a82" opacity="0.55"/>
+  <!-- meditation figure silhouette (abstract, not a portrait) -->
+  <ellipse cx="800" cy="250" rx="28" ry="32" fill="#7a8a72" opacity="0.45"/>
+  <path d="M800 282 C770 310 770 350 785 380 H815 C830 350 830 310 800 282 Z" fill="#7a8a72" opacity="0.4"/>
+</svg>
