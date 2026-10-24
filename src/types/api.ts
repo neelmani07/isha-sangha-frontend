@@ -176,3 +176,50 @@ export type ResourceLink = {
   helpfulByMe: boolean;
   sharedAt: string;
 };
+
+export type StoryCategory = 'DEVI' | 'TRANSFORMATION' | 'SADHANA' | 'SEVA';
+
+export type Story = {
+  id: number;
+  slug: string;
+  title: string;
+  category: StoryCategory;
+  excerpt: string;
+  body: string;
+  authorName: string;
+  placeKind: 'city' | 'center' | null;
+  placeSlug: string | null;
+  placeName: string | null;
+  cityId: number | null;
+  photoUrl: string | null;
+  featured: boolean;
+  publishedAt: string;
+  readMinutes: number;
+  likes: number;
+  likedByMe: boolean;
+};
+
+export type ShopCategory = 'FOOD' | 'CRAFTS' | 'CLOTHING' | 'BOOKS' | 'WELLNESS' | 'HOME' | 'OTHER';
+export type ShopDelivery = 'PICKUP' | 'LOCAL_DELIVERY' | 'SHIPS_COUNTRY' | 'SHIPS_WORLDWIDE';
+
+export type ShopListing = {
+  id: number;
+  slug: string;
+  title: string;
+  category: ShopCategory;
+  description: string | null;
+  priceAmount: number | null;
+  priceNote: string | null;
+  currency: string;
+  delivery: ShopDelivery;
+  cityId: number;
+  cityName: string;
+  citySlug: string;
+  sellerName: string;
+  contactWhatsapp: string | null;
+  contactPhone: string | null;
+  contactEmail: string | null;
+  contactWebsite: string | null;
+  photoUrl: string | null;
+  listedAt: string;
+};

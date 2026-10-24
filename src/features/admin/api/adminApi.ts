@@ -1,6 +1,20 @@
 import { apiAdminBlob, apiDelete, apiGet, apiPost, apiPut, type PageResponse, setAdminToken } from '../../../api/apiClient';
-import type { Center, City, Country, Initiative, Program, ResourceLink, Teacher } from '../../../types/api';
+import type { Center, City, Country, Initiative, Program, ResourceLink, ShopListing, Story, Teacher } from '../../../types/api';
 import type { ListingKind, ListingStatus } from '../../join/api/joinApi';
+
+export type ManageKind = 'CENTER' | 'TEACHER' | 'CITY' | 'MEDITATOR' | 'INITIATIVE' | 'RESOURCE' | 'STORY' | 'PRODUCT';
+
+export type ManageRow = {
+  kind: ManageKind;
+  id: number;
+  name: string;
+  subtitle: string | null;
+  status: 'PENDING' | 'APPROVED' | 'REJECTED' | null;
+  active: boolean;
+  lat: number | null;
+  lng: number | null;
+  publicPath: string | null;
+};
 
 export type ReviewItem = {
   kind: ListingKind;
@@ -14,6 +28,9 @@ export type ReviewItem = {
   center: Center | null;
   initiative: Initiative | null;
   resource: ResourceLink | null;
+  city: { id: number; name: string; stateName: string; countryName: string; lat: number; lng: number } | null;
+  story: Story | null;
+  product: ShopListing | null;
 };
 
 type LoginResponse = {
@@ -50,6 +67,15 @@ export const adminApi = {
   rejectListing: (kind: ListingKind, id: number, reason: string) =>
     apiPost<null>(`/admin/listings/${kind.toLowerCase()}/${id}/reject`, { reason }),
   proof: (key: string) => apiAdminBlob(`/admin/proofs/${encodeURIComponent(key)}`),
+  manageSearch: (kind: ManageKind, q: string) => apiGet<ManageRow[]>(`/admin/manage/${kind}?q=${encodeURIComponent(q)}`),
+  setVisibility: (kind: ManageKind, id: number, active: boolean) => apiPost<null>(`/admin/manage/${kind}/${id}/visibility`, { active }),
+  setFeatured: (id: number, featured: boolean) => apiPost<null>(`/admin/manage/story/${id}/featured`, { active: featured }),
+  centerDetails: (id: number) => apiGet<Center>(`/admin/manage/center/${id}/details`),
+  teacherDetails: (id: number) => apiGet<Teacher>(`/admin/manage/teacher/${id}/details`),
+  cityDetails: (id: number) => apiGet<City>(`/admin/manage/city/${id}/details`),
+  updateCenter: (id: number, body: unknown) => apiPut<Center>(`/admin/centers/${id}`, body),
+  updateTeacher: (id: number, body: unknown) => apiPut<Teacher>(`/admin/teachers/${id}`, body),
+  updateCity: (id: number, body: unknown) => apiPut<City>(`/admin/cities/${id}`, body),
   deleteCountry: (id: number) => apiDelete<void>(`/admin/countries/${id}`),
 };
 

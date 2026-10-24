@@ -18,6 +18,7 @@ export function AdminDashboardPage() {
         </div>
         <div className="flex gap-2">
           <Link to="/admin/review" className="bg-saffron px-4 py-3 text-sm font-semibold text-cream">Review submissions</Link>
+          <Link to="/admin/manage" className="bg-ink px-4 py-3 text-sm font-semibold text-cream">Manage</Link>
           <Link to="/" className="border border-ink/15 px-4 py-3 text-sm font-semibold">Public site</Link>
           <button onClick={clearAdminToken} className="bg-ink px-4 py-3 text-sm font-semibold text-cloud">Logout</button>
         </div>

@@ -1,24 +1,36 @@
+import { useQuery } from '@tanstack/react-query';
+import { PenLine } from 'lucide-react';
 import { useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Ornament } from '../../../components/brand/Ornament';
 import { ClosingBand } from '../../../components/layout/ClosingBand';
 import { BackdropPhoto } from '../../../components/ui/BackdropPhoto';
-import { ContributeButton } from '../../../components/ui/ContributeButton';
 import { sitePhotos } from '../../../content/sitePhotos';
-import { SampleNotice } from '../../../components/ui/SampleNotice';
 import { TwoToneHeading } from '../../../components/ui/TwoToneHeading';
 import { FeaturedStoryCard, StoryCard } from '../components/StoryCard';
-import { sampleStories, storyCategories, type StoryCategory } from '../data/sampleStories';
+import type { StoryCategory } from '../../../types/api';
+import { storiesApi, storyCategories } from '../api/storiesApi';
+
+function ShareStoryLink() {
+  return (
+    <Link
+      to="/stories/share"
+      className="inline-flex items-center gap-2 rounded-md bg-saffron px-5 py-3 text-sm font-semibold text-cream shadow-card transition hover:bg-saffron-dark"
+    >
+      <PenLine size={16} /> Share your story
+    </Link>
+  );
+}
 
 export function StoriesPage() {
   const [category, setCategory] = useState<StoryCategory | 'ALL'>('ALL');
-  const featured = sampleStories.find((story) => story.featured) ?? sampleStories[0];
+  const { data, isLoading } = useQuery({ queryKey: ['stories'], queryFn: storiesApi.list });
+  const all = useMemo(() => data ?? [], [data]);
+  const featured = all.find((story) => story.featured) ?? all[0];
 
   const stories = useMemo(
-    () =>
-      sampleStories.filter(
-        (story) => (category === 'ALL' ? story.slug !== featured.slug : story.category === category),
-      ),
-    [category, featured.slug],
+    () => all.filter((story) => (category === 'ALL' ? story.slug !== featured?.slug : story.category === category)),
+    [all, category, featured?.slug],
   );
 
   return (
@@ -28,14 +40,10 @@ export function StoriesPage() {
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-maroon-dark via-maroon-dark/70 to-transparent md:via-maroon-dark/40" />
         <div className="mx-auto max-w-6xl px-4 pb-20 pt-14 sm:px-6 sm:pt-24 lg:px-8">
           <div className="max-w-xl">
-            <div className="[&>p]:border-cream/20 [&>p]:bg-cream/10 [&>p]:text-cream/80">
-              <SampleNotice>Preview with sample stories</SampleNotice>
-            </div>
             <TwoToneHeading
               as="h1"
               size="lg"
               tone="light"
-              className="mt-6"
               title="Your Stories"
               subtitle="moments of grace, change and the magic of Devi"
             />
@@ -45,18 +53,15 @@ export function StoriesPage() {
               into their lives. Each story is linked to the place where it happened.
             </p>
             <div className="mt-8">
-              <ContributeButton
-                tone="light"
-                label="Share your story"
-                comingSoonText="Story submissions open soon. We'll let you know as soon as you can post yours."
-              />
+              <ShareStoryLink />
             </div>
           </div>
         </div>
       </section>
 
       <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
-        {category === 'ALL' && <FeaturedStoryCard story={featured} />}
+        {isLoading && <p className="text-muted">Loading…</p>}
+        {category === 'ALL' && featured && <FeaturedStoryCard story={featured} />}
 
         <div className={`flex gap-2 overflow-x-auto pb-2 ${category === 'ALL' ? 'mt-12' : ''}`} role="tablist" aria-label="Story categories">
           {storyCategories.map((item) => (
@@ -93,11 +98,7 @@ export function StoriesPage() {
         subtitle="begins in stillness"
         text="Something shifted for you: on a mat, in a temple, while serving a meal. Telling it might be exactly what someone else needs to hear today."
         action={
-          <ContributeButton
-            tone="light"
-            label="Share your story"
-            comingSoonText="Story submissions open soon. We'll let you know as soon as you can post yours."
-          />
+          <ShareStoryLink />
         }
       />
     </main>

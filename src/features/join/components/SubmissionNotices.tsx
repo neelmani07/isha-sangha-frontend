@@ -7,6 +7,9 @@ const afterReview: Record<ListingKind, string> = {
   CENTER: 'Once your proof is checked, it will appear on the map with a verified badge.',
   INITIATIVE: 'Once approved, it will appear on the Initiatives page and supporters can reach you directly.',
   RESOURCE: 'Once approved, it will appear in the Resources library.',
+  CITY: 'Once confirmed, it will appear on the map.',
+  STORY: 'Once a volunteer has read it, it will be published on the Stories page.',
+  PRODUCT: 'Once approved, it will appear in the Sangha Shop and buyers can contact you directly.',
 };
 
 export function SubmittedNotice({ listing }: { listing: MyListing }) {
