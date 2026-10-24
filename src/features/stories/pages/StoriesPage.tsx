@@ -94,6 +94,7 @@ export function StoriesPage() {
       <ClosingBand
         photo={sitePhotos.dhyanalinga}
         photoPosition="center 45%"
+        photoOpacity="opacity-75"
         title="Every story"
         subtitle="begins in stillness"
         text="Something shifted for you: on a mat, in a temple, while serving a meal. Telling it might be exactly what someone else needs to hear today."
