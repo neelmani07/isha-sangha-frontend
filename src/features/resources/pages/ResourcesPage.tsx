@@ -3,6 +3,7 @@ import { Plus } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Ornament } from '../../../components/brand/Ornament';
+import { ClosingBand } from '../../../components/layout/ClosingBand';
 import { BackdropPhoto } from '../../../components/ui/BackdropPhoto';
 import { SearchField } from '../../../components/ui/Form';
 import { TwoToneHeading } from '../../../components/ui/TwoToneHeading';
@@ -93,6 +94,23 @@ export function ResourcesPage() {
           ))}
         </div>
       </section>
+
+      <ClosingBand
+        photo={sitePhotos.adiyogiWide}
+        photoPosition="center 40%"
+        photoOpacity="opacity-75"
+        title="Knowledge grows"
+        subtitle="when it is shared"
+        text="A programme schedule, a useful app, a satsang group that helped you. Share the link, and the next seeker finds the way a little easier."
+        action={
+          <Link
+            to="/resources/suggest"
+            className="inline-flex items-center gap-2 rounded-md bg-saffron px-5 py-3 text-sm font-semibold text-cream shadow-card transition hover:bg-saffron-dark"
+          >
+            <Plus size={16} /> Share a link
+          </Link>
+        }
+      />
     </main>
   );
 }
