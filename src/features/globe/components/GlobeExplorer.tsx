@@ -40,7 +40,7 @@ const markerFilters: { label: string; value: MarkerFilter; color?: string }[] = 
   { label: 'Countries', value: 'country', color: symbols.COUNTRY.globeColor },
   { label: 'Cities', value: 'city', color: symbols.CITY.globeColor },
   { label: nav.centres, value: 'center', color: symbols.CITY_CENTER.globeColor },
-  { label: 'Teachers', value: 'teacher', color: symbols.TEACHER.globeColor },
+  { label: 'Hatha yoga teachers', value: 'teacher', color: symbols.TEACHER.globeColor },
   { label: 'Meditators', value: 'meditator', color: symbols.MEDITATOR.globeColor },
 ];
 
@@ -413,7 +413,7 @@ export function GlobeExplorer({ onJumpToSection }: GlobeExplorerProps) {
 
             {selectedMarker.teacherCount != null && (
               <div className="rounded-md border border-border bg-sand/60 p-4">
-                <p className="text-xs uppercase tracking-[0.18em] text-muted">Teachers</p>
+                <p className="text-xs uppercase tracking-[0.18em] text-muted">Hatha yoga teachers</p>
                 <p className="mt-2 font-display text-3xl text-ink">{selectedMarker.teacherCount}</p>
               </div>
             )}

@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { ArrowLeft, Globe, Mail, MapPin, MessageCircle, Phone, Truck } from 'lucide-react';
 import { Link, useParams } from 'react-router-dom';
+import { shopName } from '../../../content/copy';
 import { NotFoundPage } from '../../../pages/NotFoundPage';
 import { deliveryLabel, priceText, sellerLinks, shopApi, shopCategoryLabel, shopRules } from '../api/shopApi';
 import { ProductCard, ProductPhoto } from '../components/ProductCard';
@@ -22,7 +23,7 @@ export function ProductPage() {
     <main className="bg-cream pt-[var(--header-h)] font-body text-ink">
       <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
         <Link to="/shop" className="inline-flex items-center gap-1.5 text-sm font-semibold text-muted hover:text-ink">
-          <ArrowLeft size={16} /> Sangha Shop
+          <ArrowLeft size={16} /> {shopName.title}
         </Link>
         <div className="mt-6 grid gap-8 md:grid-cols-2">
           <ProductPhoto item={item} className="aspect-square w-full rounded-xl border border-border" />

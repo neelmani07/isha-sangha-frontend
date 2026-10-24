@@ -4,6 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import { Button } from '../../../components/ui/Button';
 import { FormField, Input, Select, Textarea } from '../../../components/ui/Form';
 import type { ShopCategory, ShopDelivery } from '../../../types/api';
+import { shopName } from '../../../content/copy';
 import { useAuth } from '../../auth/context/AuthContext';
 import { joinApi, type MyListing } from '../../join/api/joinApi';
 import { CityPicker, type PickedCity } from '../../join/components/CityPicker';
@@ -95,7 +96,7 @@ export function SellProductPage() {
 
   if (submitted) {
     return (
-      <JoinLayout title="Thank you" subtitle="your item is with our reviewers" back={{ to: '/shop', label: 'Sangha Shop' }}>
+      <JoinLayout title="Thank you" subtitle="your item is with our reviewers" back={{ to: '/shop', label: shopName.title }}>
         <SubmittedNotice listing={submitted} />
       </JoinLayout>
     );
@@ -103,9 +104,9 @@ export function SellProductPage() {
 
   return (
     <JoinLayout
-      title={editingId ? 'Update your item' : 'Sell in the Sangha Shop'}
+      title={editingId ? 'Update your item' : `Sell in the ${shopName.title}`}
       subtitle="something you make, grow or write"
-      back={{ to: '/shop', label: 'Sangha Shop' }}
+      back={{ to: '/shop', label: shopName.title }}
       intro="Buyers contact you directly and you agree payment and delivery between you. A volunteer reviews every item before it appears."
     >
       {existing.data?.status === 'REJECTED' && <RejectionNotice reason={existing.data.rejectionReason} />}

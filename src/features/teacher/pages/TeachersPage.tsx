@@ -18,7 +18,7 @@ export function TeachersPage() {
     <PageLayout
       title={pages.teachers.title}
       description={pages.teachers.description}
-      breadcrumbs={[{ label: nav.explore, to: '/' }, { label: 'Teachers' }]}
+      breadcrumbs={[{ label: nav.explore, to: '/' }, { label: nav.teachers }]}
     >
       <Section title="All teachers">
         <div className="grid gap-4 md:grid-cols-2">

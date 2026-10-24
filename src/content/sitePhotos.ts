@@ -56,6 +56,30 @@ export const sitePhotos = {
     alt: 'Nandi at the Isha Yoga Centre',
     credit: { author: 'Natesh Ramasamy', license: 'CC BY 2.0', source: 'https://commons.wikimedia.org/wiki/File:Isha_Yoga_Center_-_Bull.jpg' },
   },
+  trimurti: {
+    src: '/images/ashram/trimurti.jpg',
+    alt: 'The Trimurti relief at the Isha Yoga Centre, lit with lamps under a full moon',
+    // Provided by the site team (watermark cropped off).
+    credit: null,
+  },
+  yogiNaga: {
+    src: '/images/ashram/yogi-naga.jpg',
+    alt: 'A painting of a blue yogi with a serpent body beneath a great tree',
+    // Provided by the site team.
+    credit: null,
+  },
+  spandaHall: {
+    src: '/images/ashram/spanda-hall.jpg',
+    alt: 'Gardens at Spanda Hall, seen between carved stone pillars',
+    // Provided by the site team.
+    credit: null,
+  },
+  ashramVelliangiri: {
+    src: '/images/ashram/ashram-velliangiri.jpg',
+    alt: 'The ashram and lotus pond beneath the Velliangiri foothills',
+    // Provided by the site team.
+    credit: null,
+  },
 } satisfies Record<string, SitePhoto>;
 
 export const photoCredits = Object.values(sitePhotos).flatMap((photo) => (photo.credit ? [{ ...photo.credit, alt: photo.alt }] : []));

@@ -9,7 +9,7 @@ const afterReview: Record<ListingKind, string> = {
   RESOURCE: 'Once approved, it will appear in the Resources library.',
   CITY: 'Once confirmed, it will appear on the map.',
   STORY: 'Once a volunteer has read it, it will be published on the Stories page.',
-  PRODUCT: 'Once approved, it will appear in the Sangha Shop and buyers can contact you directly.',
+  PRODUCT: "Once approved, it will appear in the Volunteers' Shop and buyers can contact you directly.",
 };
 
 export function SubmittedNotice({ listing }: { listing: MyListing }) {
