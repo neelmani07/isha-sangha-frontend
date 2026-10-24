@@ -6,6 +6,7 @@ import { LinkCard } from '../../../components/ui/Card';
 import { CardSkeleton } from '../../../components/ui/Skeleton';
 import { EmptyState } from '../../../components/ui/EmptyState';
 import { resourcesApi } from '../../../api/resources';
+import { nav, pages } from '../../../content/copy';
 
 export function TeachersPage() {
   const { data, isError, isLoading } = useQuery({
@@ -15,15 +16,15 @@ export function TeachersPage() {
 
   return (
     <PageLayout
-      title="Teachers"
-      description="Discover Isha Hatha Yoga teachers by city and programs offered."
-      breadcrumbs={[{ label: 'Globe', to: '/' }, { label: 'Teachers' }]}
+      title={pages.teachers.title}
+      description={pages.teachers.description}
+      breadcrumbs={[{ label: nav.explore, to: '/' }, { label: 'Teachers' }]}
     >
       <Section title="All teachers">
         <div className="grid gap-4 md:grid-cols-2">
           {isLoading &&
             Array.from({ length: 6 }).map((_, index) => <CardSkeleton key={index} />)}
-          {isError && <EmptyState message="The backend is not reachable yet." />}
+          {isError && <EmptyState message="We couldn’t load the list just now. Please try again in a moment." />}
           {data?.content.map((teacher) => (
             <LinkCard key={teacher.id} to={`/teacher/${teacher.slug}`}>
               <div className="flex gap-4">

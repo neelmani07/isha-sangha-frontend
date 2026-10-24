@@ -97,11 +97,11 @@ export const sampleInitiatives: Initiative[] = [
     description: [
       'Most children in these villages are the first in their families to finish school. In the evenings there is no one at home who can help with homework.',
       'Volunteers run two-hour sessions, five evenings a week, in a borrowed community hall. We focus on reading, basic maths and spoken English.',
-      'Around 70 children attend regularly. Last year every Class 10 student in the program passed their board exams.',
+      'Around 70 children attend regularly. Last year every Class 10 student in the programme passed their board exams.',
     ],
     imageId: '1497486751825-1233686d5d80',
     startedBy: 'Lakshmi S.',
-    place: { kind: 'center', slug: 'isha-yoga-center-coimbatore', name: 'Near Isha Yoga Center' },
+    place: { kind: 'center', slug: 'isha-yoga-center-coimbatore', name: 'Near Isha Yoga Centre' },
     coords: { lat: 10.9724, lng: 76.7366 },
     startedIn: 2021,
     needs: ['VOLUNTEERS', 'FUNDS', 'MATERIALS'],

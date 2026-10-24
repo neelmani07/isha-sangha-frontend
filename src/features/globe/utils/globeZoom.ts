@@ -9,7 +9,7 @@ export const INDIA_HOME_VIEW = { lat: 22.5, lng: 79.0, altitude: 2.15 };
 export const zoomTierMeta: Record<ZoomTier, { label: string; hint: string }> = {
   world: { label: 'World', hint: 'Countries as dots — scroll to zoom in' },
   region: { label: 'Region', hint: 'Cities appear as you zoom closer' },
-  city: { label: 'City', hint: 'Centers and shops emerge — keep zooming' },
+  city: { label: 'City', hint: 'Centres and shops appear — keep zooming' },
   local: { label: 'Local', hint: 'Street-level view with map detail' },
   ground: { label: 'Ground', hint: 'Closest view — click a dot for details' },
 };

@@ -6,6 +6,7 @@ import { CardSkeleton } from '../../../components/ui/Skeleton';
 import { EmptyState } from '../../../components/ui/EmptyState';
 import { resourcesApi } from '../../../api/resources';
 import { centerTypeBadge } from '../../../utils/labels';
+import { nav, pages } from '../../../content/copy';
 
 export function CentersPage() {
   const { data, isError, isLoading } = useQuery({
@@ -15,15 +16,15 @@ export function CentersPage() {
 
   return (
     <PageLayout
-      title="Centers"
-      description="Explore Isha centers, temples, and shops around the world."
-      breadcrumbs={[{ label: 'Globe', to: '/' }, { label: 'Centers' }]}
+      title={pages.centres.title}
+      description={pages.centres.description}
+      breadcrumbs={[{ label: nav.explore, to: '/' }, { label: nav.centres }]}
     >
-      <Section title="All locations">
+      <Section title="All centres, temples and shops">
         <div className="grid gap-4 md:grid-cols-2">
           {isLoading &&
             Array.from({ length: 6 }).map((_, index) => <CardSkeleton key={index} />)}
-          {isError && <EmptyState message="The backend is not reachable yet." />}
+          {isError && <EmptyState message="We couldn’t load the list just now. Please try again in a moment." />}
           {data?.content.map((center) => {
             const badge = centerTypeBadge(center.type);
             return (

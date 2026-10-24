@@ -10,7 +10,7 @@ const paths = [
     icon: Sparkles,
     color: symbols.MEDITATOR.color,
     title: 'I meditate',
-    text: 'Add yourself to the map so seekers nearby know they are not alone. Goes live right away.',
+    text: 'Add yourself to the map so meditators nearby know they are not alone. Goes live right away.',
     note: 'Shown at an approximate spot in your city, with your first name and initial.',
   },
   {
@@ -18,15 +18,15 @@ const paths = [
     icon: GraduationCap,
     color: symbols.TEACHER.color,
     title: 'I teach',
-    text: 'List yourself as an Isha Hatha Yoga or program teacher so people can find your classes.',
+    text: 'List yourself as an Isha Hatha Yoga or programme teacher so people can find your classes.',
     note: 'Needs a certificate or other proof. Reviewed before it appears.',
   },
   {
     to: '/join/center',
     icon: Building2,
     color: symbols.CITY_CENTER.color,
-    title: 'I run a center, temple or shop',
-    text: 'Add an Isha center, a Devi temple or an Isha shop with its address, hours and contacts.',
+    title: 'I run a centre, temple or shop',
+    text: 'Add an Isha centre, a Devi temple or an Isha shop with its address, hours and contacts.',
     note: 'Needs proof such as a letter from Isha. Reviewed before it appears.',
   },
 ];

@@ -5,6 +5,7 @@ import { FormField, Input, Select, Textarea } from '../../../components/ui/Form'
 import { Card } from '../../../components/ui/Card';
 import { resourcesApi } from '../../../api/resources';
 import type { FeedbackType } from '../../../types/api';
+import { nav, pages } from '../../../content/copy';
 
 export function FeedbackPage() {
   const [name, setName] = useState('');
@@ -21,17 +22,17 @@ export function FeedbackPage() {
       setName('');
       setEmail('');
       setMessage('');
-      setStatus('Feedback submitted. Thank you for helping improve the map.');
+      setStatus('Thank you. A volunteer will read your message soon.');
     } catch (error) {
-      setStatus(error instanceof Error ? error.message : 'Could not submit feedback.');
+      setStatus(error instanceof Error ? error.message : 'Your message couldn’t be sent. Please try again.');
     }
   }
 
   return (
     <PageLayout
       title="Feedback"
-      description="Send a correction, bug report, or feature idea for the Isha World map."
-      breadcrumbs={[{ label: 'Globe', to: '/' }, { label: 'Feedback' }]}
+      description={pages.feedback.description}
+      breadcrumbs={[{ label: nav.explore, to: '/' }, { label: 'Feedback' }]}
     >
       <Card className="max-w-2xl p-6">
         <form onSubmit={submit} className="grid gap-4">
@@ -49,16 +50,16 @@ export function FeedbackPage() {
           <FormField label="Type">
             <Select value={type} onChange={(event) => setType(event.target.value as FeedbackType)}>
               <option value="GENERAL_FEEDBACK">General feedback</option>
-              <option value="DATA_CORRECTION">Data correction</option>
-              <option value="FEATURE_REQUEST">Feature request</option>
-              <option value="BUG">Bug</option>
+              <option value="DATA_CORRECTION">Correction to a place or person</option>
+              <option value="FEATURE_REQUEST">Idea for the site</option>
+              <option value="BUG">Something isn’t working</option>
             </Select>
           </FormField>
           <FormField label="Message">
             <Textarea
               value={message}
               onChange={(event) => setMessage(event.target.value)}
-              placeholder="Tell us what you noticed or what you'd like to see..."
+              placeholder="Tell us what you noticed, or what you’d like to see…"
               required
             />
           </FormField>

@@ -11,12 +11,13 @@ import { FormSection, JoinLayout } from '../components/JoinLayout';
 import { LocationPicker } from '../components/LocationPicker';
 import { ProofUpload } from '../components/ProofUpload';
 import { RejectionNotice, SubmittedNotice } from '../components/SubmissionNotices';
+import { centreTypeLabel } from '../../../content/copy';
 
 const centerTypes: { value: CenterType; label: string }[] = [
-  { value: 'CITY_CENTER', label: 'Isha center' },
-  { value: 'MAJOR_CENTER', label: 'Ashram / major center' },
-  { value: 'DEVI_TEMPLE', label: 'Devi temple' },
-  { value: 'ISHA_SHOP', label: 'Isha shop' },
+  { value: 'CITY_CENTER', label: centreTypeLabel.CITY_CENTER },
+  { value: 'MAJOR_CENTER', label: centreTypeLabel.MAJOR_CENTER },
+  { value: 'DEVI_TEMPLE', label: centreTypeLabel.DEVI_TEMPLE },
+  { value: 'ISHA_SHOP', label: centreTypeLabel.ISHA_SHOP },
 ];
 
 export function CenterSubmissionPage() {
@@ -104,7 +105,7 @@ export function CenterSubmissionPage() {
 
   return (
     <JoinLayout
-      title={editingId ? 'Update your listing' : 'Add a center, temple or shop'}
+      title={editingId ? 'Update your listing' : 'Add a centre, temple or shop'}
       subtitle="so people can find their way to it"
       intro="It appears on the map after a volunteer checks your proof. Approved places get a verified badge."
     >
@@ -119,7 +120,7 @@ export function CenterSubmissionPage() {
           <FormSection title="The place">
             <div className="grid gap-4 sm:grid-cols-[1.4fr_1fr]">
               <FormField label="Name">
-                <Input value={name} onChange={(e) => setName(e.target.value)} required maxLength={250} placeholder="e.g. Isha Saibaba Colony" />
+                <Input value={name} onChange={(e) => setName(e.target.value)} required maxLength={250} placeholder="e.g. Isha Centre, Saibaba Colony" />
               </FormField>
               <FormField label="Type">
                 <Select value={type} onChange={(e) => setType(e.target.value as CenterType)}>

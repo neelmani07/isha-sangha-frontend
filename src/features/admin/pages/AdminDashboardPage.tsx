@@ -36,17 +36,17 @@ export function AdminDashboardPage() {
           <Metric label="Countries" value={data.countries.totalElements} />
           <Metric label="Cities" value={data.cities.totalElements} />
           <Metric label="Teachers" value={data.teachers.totalElements} />
-          <Metric label="Centers" value={data.centers.totalElements} />
-          <Metric label="Programs" value={data.programs.totalElements} />
+          <Metric label="Centres" value={data.centers.totalElements} />
+          <Metric label="Programmes" value={data.programs.totalElements} />
         </div>
       )}
 
       {data && (
         <section className="mt-10 grid gap-6 lg:grid-cols-2">
-          <Panel title="Latest Cities" items={data.cities.content.map((city) => city.name)} />
-          <Panel title="Latest Teachers" items={data.teachers.content.map((teacher) => teacher.name)} />
-          <Panel title="Latest Centers" items={data.centers.content.map((center) => center.name)} />
-          <Panel title="Programs" items={data.programs.content.map((program) => program.name)} />
+          <Panel title="Latest cities" items={data.cities.content.map((city) => city.name)} />
+          <Panel title="Latest teachers" items={data.teachers.content.map((teacher) => teacher.name)} />
+          <Panel title="Latest centres" items={data.centers.content.map((center) => center.name)} />
+          <Panel title="Programmes" items={data.programs.content.map((program) => program.name)} />
         </section>
       )}
     </main>

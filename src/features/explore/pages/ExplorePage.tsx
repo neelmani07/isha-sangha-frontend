@@ -13,6 +13,7 @@ import { sampleInitiatives } from '../../initiatives/data/sampleInitiatives';
 import { NearbyPanel } from '../../nearby/components/NearbyPanel';
 import { StoryCard } from '../../stories/components/StoryCard';
 import { sampleStories } from '../../stories/data/sampleStories';
+import { pages } from '../../../content/copy';
 
 /** Explore is one long page: globe hero, then Near me, Search & browse, and community stories. */
 export function ExplorePage() {
@@ -37,19 +38,19 @@ export function ExplorePage() {
 
       <ExploreSection
         id="nearby"
-        eyebrow="Near me"
-        title="Find Isha near you"
-        subtitle="teachers, centers and temples close by"
-        action={<SeeAll to="/join" label="Add yourself to the map" />}
+        eyebrow={pages.explore.nearMe.eyebrow}
+        title={pages.explore.nearMe.title}
+        subtitle={pages.explore.nearMe.subtitle}
+        action={<SeeAll to="/join" label={pages.explore.nearMe.join} />}
       >
         <NearbyPanel />
       </ExploreSection>
 
       <ExploreSection
         id="search"
-        eyebrow="Search & browse"
-        title="Look up a place or a person"
-        subtitle="across every country, city and center"
+        eyebrow={pages.explore.browse.eyebrow}
+        title={pages.explore.browse.title}
+        subtitle={pages.explore.browse.subtitle}
         paper
         backdrop={sitePhotos.velliangiriTridents}
       >
@@ -58,9 +59,9 @@ export function ExplorePage() {
 
       <ExploreSection
         id="stories"
-        eyebrow="From the community"
-        title="Stories from these places"
-        subtitle="grace, change and the magic of Devi"
+        eyebrow={pages.explore.stories.eyebrow}
+        title={pages.explore.stories.title}
+        subtitle={pages.explore.stories.subtitle}
         action={<SeeAll to="/stories" label="All stories" />}
       >
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -72,9 +73,9 @@ export function ExplorePage() {
 
       <ExploreSection
         id="initiatives"
-        eyebrow="Your initiatives"
-        title="Seva that started with one person"
-        subtitle="and grew with the community"
+        eyebrow={pages.explore.initiatives.eyebrow}
+        title={pages.explore.initiatives.title}
+        subtitle={pages.explore.initiatives.subtitle}
         action={<SeeAll to="/initiatives" label="All initiatives" />}
         paper
       >
@@ -137,9 +138,9 @@ function DonateBand() {
     <ClosingBand
       photo={sitePhotos.adiyogi}
       photoPosition="center 30%"
-      title="Your contribution"
-      subtitle="can change someone's life"
-      text="This community runs on volunteers. A small gift helps a tuition class buy books, a planting drive buy saplings, and keeps this map free for everyone."
+      title={pages.explore.donate.title}
+      subtitle={pages.explore.donate.subtitle}
+      text={pages.explore.donate.text}
       action={
         <Link
           to="/donate"
@@ -164,15 +165,15 @@ function SearchAndBrowse() {
   }
 
   const browse = [
-    { to: '/teachers', title: 'All teachers', text: 'Hatha Yoga teachers and the programs they offer.', icon: Users },
-    { to: '/centers', title: 'All centers', text: 'Centers, Devi temples and Isha shops.', icon: Building2 },
-    { to: '/search', title: 'Advanced search', text: 'Search every country, state, city and person.', icon: Search },
+    { to: '/teachers', ...pages.explore.browse.teachers, icon: Users },
+    { to: '/centers', ...pages.explore.browse.centres, icon: Building2 },
+    { to: '/search', ...pages.explore.browse.search, icon: Search },
   ];
 
   return (
     <div className="space-y-6">
       <form onSubmit={submit}>
-        <SearchField value={query} onChange={setQuery} placeholder="Try “Coimbatore”, “Mumbai” or a teacher’s name" />
+        <SearchField value={query} onChange={setQuery} placeholder={pages.explore.browse.placeholder} />
       </form>
       <div className="grid gap-4 md:grid-cols-3">
         {browse.map((item) => (

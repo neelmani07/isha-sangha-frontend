@@ -8,10 +8,10 @@ const columns = [
   {
     title: 'Explore',
     links: [
-      { to: '/', label: 'Globe' },
+      { to: '/', label: 'The globe' },
       { to: '/nearby', label: 'Near me' },
       { to: '/teachers', label: 'Teachers' },
-      { to: '/centers', label: 'Centers' },
+      { to: '/centers', label: 'Centres' },
     ],
   },
   {

@@ -11,6 +11,7 @@ import { Avatar } from '../../../components/ui/Avatar';
 import { EmptyState } from '../../../components/ui/EmptyState';
 import { PageHeaderSkeleton } from '../../../components/ui/Skeleton';
 import { resourcesApi } from '../../../api/resources';
+import { nav } from '../../../content/copy';
 
 export function TeacherPage() {
   const { slug = '' } = useParams();
@@ -32,10 +33,10 @@ export function TeacherPage() {
     return (
       <DetailPageLayout
         title="Teacher not found"
-        description="The teacher may not exist yet or the backend is not running."
-        breadcrumbs={[{ label: 'Globe', to: '/' }, { label: 'Teachers', to: '/teachers' }, { label: 'Not found' }]}
+        description="We couldn’t find this teacher on the map."
+        breadcrumbs={[{ label: nav.explore, to: '/' }, { label: 'Teachers', to: '/teachers' }, { label: 'Not found' }]}
       >
-        <EmptyState message="Try searching for another teacher or return to the globe." />
+        <EmptyState message="Try searching for another teacher, or go back to Explore." />
       </DetailPageLayout>
     );
   }
@@ -45,13 +46,13 @@ export function TeacherPage() {
   return (
     <DetailPageLayout
       title={data.name}
-      subtitle={`Isha Hatha Yoga Teacher · ${data.cityName}`}
+      subtitle={`Isha Hatha Yoga teacher · ${data.cityName}`}
       description={data.bio ?? undefined}
       badge={data.verified ? 'Verified teacher' : 'Teacher'}
       badgeVariant={data.verified ? 'leaf' : 'sky'}
       heroImageUrl={data.photoUrl}
       breadcrumbs={[
-        { label: 'Globe', to: '/' },
+        { label: nav.explore, to: '/' },
         { label: 'Teachers', to: '/teachers' },
         { label: data.cityName, to: `/search?q=${encodeURIComponent(data.cityName)}` },
         { label: data.name },

@@ -92,7 +92,7 @@ export function CityMap({
             <Popup>
               <div className="min-w-[180px] text-ink">
                 <p className="text-[10px] uppercase tracking-[0.18em] text-ink/50">
-                  {marker.type === 'teacher' ? 'Teacher' : 'Center'}
+                  {marker.type === 'teacher' ? 'Teacher' : 'Centre'}
                 </p>
                 <p className="font-semibold">{marker.name}</p>
                 <p className="mt-1 text-xs text-ink/60">{marker.subtitle}</p>

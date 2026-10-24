@@ -55,7 +55,7 @@ export const sampleStories: Story[] = [
     imageId: '1506126613408-eca07ce68773',
     photo: DEVI_PHOTO,
     author: 'Meera R.',
-    place: { kind: 'center', slug: 'isha-yoga-center-coimbatore', name: 'Isha Yoga Center Coimbatore' },
+    place: { kind: 'center', slug: 'isha-yoga-center-coimbatore', name: 'Isha Yoga Centre Coimbatore' },
     publishedOn: '2026-09-28',
     likes: 214,
     readMinutes: 3,
@@ -93,7 +93,7 @@ export const sampleStories: Story[] = [
     ],
     imageId: '1593113598332-cd288d649433',
     author: 'Lakshmi S.',
-    place: { kind: 'center', slug: 'isha-yoga-center-coimbatore', name: 'Isha Yoga Center Coimbatore' },
+    place: { kind: 'center', slug: 'isha-yoga-center-coimbatore', name: 'Isha Yoga Centre Coimbatore' },
     publishedOn: '2026-09-14',
     likes: 342,
     readMinutes: 2,
@@ -121,10 +121,10 @@ export const sampleStories: Story[] = [
     title: 'From anger to a quiet I did not know I had',
     category: 'TRANSFORMATION',
     excerpt:
-      'I used to think my temper kept me sharp. A weekend program in Melbourne showed me how much of my life it was quietly eating.',
+      'I used to think my temper kept me sharp. A weekend programme in Melbourne showed me how much of my life it was quietly eating.',
     body: [
       'I was proud of my temper. I thought it made me effective at work and honest at home. My teenage son had a different word for it.',
-      'I went to a weekend program in Melbourne mostly so he would stop bringing it up. On the second day, in a very simple process, I watched an old anger rise and pass without me doing anything with it.',
+      'I went to a weekend programme in Melbourne mostly so he would stop bringing it up. On the second day, in a very simple process, I watched an old anger rise and pass without me doing anything with it.',
       'It still rises. The difference is that there is now a little space between it and me. My son says I have become boring. I take it as the highest compliment.',
     ],
     imageId: '1490730141103-6cac27aaab94',
@@ -158,9 +158,9 @@ export const sampleStories: Story[] = [
     title: 'Learning to sit still in Tennessee',
     category: 'SADHANA',
     excerpt:
-      'I flew in for a residential program expecting to be bored. I left with a stillness I keep coming back to every evening.',
+      'I flew in for a residential programme expecting to be bored. I left with a stillness I keep coming back to every evening.',
     body: [
-      'I had never sat still for more than ten minutes in my adult life. I flew to Tennessee for a residential program mostly because my sister had already paid for it.',
+      'I had never sat still for more than ten minutes in my adult life. I flew to Tennessee for a residential programme mostly because my sister had already paid for it.',
       'The hills there are soft and green, and the silence is a different kind of silence. By the third day I stopped checking my phone. By the fifth I stopped wanting to.',
       'Back home the noise came back, of course. But I found I could return to that stillness for a few minutes each evening. That is enough. That is more than I had.',
     ],

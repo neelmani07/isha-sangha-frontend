@@ -18,13 +18,15 @@ import { formatDistance, haversineKm } from '../../../utils/geo';
 import { centerTypeBadge } from '../../../utils/labels';
 import { CityMap } from '../components/CityMap';
 import { useGeolocation } from '../../../hooks/useGeolocation';
+import { nav } from '../../../content/copy';
+import { centreTypeFilterLabel } from '../../../content/copy';
 
 const centerTypes: Array<{ label: string; value: CenterType | 'ALL' }> = [
   { label: 'All', value: 'ALL' },
-  { label: 'Centers', value: 'CITY_CENTER' },
-  { label: 'Major', value: 'MAJOR_CENTER' },
-  { label: 'Temples', value: 'DEVI_TEMPLE' },
-  { label: 'Shops', value: 'ISHA_SHOP' },
+  { label: centreTypeFilterLabel.CITY_CENTER, value: 'CITY_CENTER' },
+  { label: centreTypeFilterLabel.MAJOR_CENTER, value: 'MAJOR_CENTER' },
+  { label: centreTypeFilterLabel.DEVI_TEMPLE, value: 'DEVI_TEMPLE' },
+  { label: centreTypeFilterLabel.ISHA_SHOP, value: 'ISHA_SHOP' },
 ];
 
 const PAGE_SIZE = 20;
@@ -122,8 +124,8 @@ export function CityPage() {
     return (
       <DetailPageLayout
         title="City not found"
-        description="The city may not exist yet or the backend is not running."
-        breadcrumbs={[{ label: 'Globe', to: '/' }, { label: 'Not found' }]}
+        description="We couldn’t find this city on the map. Try searching for it, or pick a nearby city."
+        breadcrumbs={[{ label: nav.explore, to: '/' }, { label: 'Not found' }]}
       >
         <EmptyState message="Try searching for another city or return to the globe." />
       </DetailPageLayout>
@@ -143,7 +145,7 @@ export function CityPage() {
       badgeVariant="saffron"
       heroImageUrl={city.heroImageUrl}
       breadcrumbs={[
-        { label: 'Globe', to: '/' },
+        { label: nav.explore, to: '/' },
         { label: city.countryName, to: `/search?q=${encodeURIComponent(city.countryName)}` },
         { label: city.name },
       ]}
@@ -151,13 +153,13 @@ export function CityPage() {
       <div className="grid gap-4 sm:grid-cols-4">
         <StatCard label="Meditators" value={city.stats.meditatorCount} />
         <StatCard label="Teachers" value={city.stats.teacherCount} />
-        <StatCard label="Centers" value={city.stats.centerCount} />
+        <StatCard label="Centres" value={city.stats.centerCount} />
         <StatCard label="Shops" value={city.stats.shopCount} />
       </div>
 
       <div className="grid gap-8 xl:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
         <div className="space-y-8">
-          <Section title="Hatha Yoga Teachers">
+          <Section title="Isha Hatha Yoga teachers">
             <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <SearchField
                 value={teacherSearch}
@@ -175,7 +177,7 @@ export function CityPage() {
                 }}
                 className="min-w-[180px]"
               >
-                <option value="">All programs</option>
+                <option value="">All programmes</option>
                 {programsQuery.data?.content.map((program) => (
                   <option key={program.id} value={program.id}>
                     {program.name}
@@ -218,14 +220,14 @@ export function CityPage() {
             <Pagination page={teacherPage} totalPages={teachersQuery.data?.totalPages ?? 0} onChange={setTeacherPage} />
           </Section>
 
-          <Section title="Centers & Shops">
+          <Section title="Centres, temples & shops">
             <SearchField
               value={centerSearch}
               onChange={(value) => {
                 setCenterSearch(value);
                 setCenterPage(0);
               }}
-              placeholder="Search centers and shops"
+              placeholder="Search centres, temples and shops"
             />
 
             <div className="flex flex-wrap gap-2">
@@ -277,7 +279,7 @@ export function CityPage() {
                 );
               })}
               {!centersQuery.isLoading && centersQuery.data?.content.length === 0 && (
-                <EmptyState message="No centers or shops match your filters in this city." />
+                <EmptyState message="No centres, temples or shops match these filters here." />
               )}
             </div>
 

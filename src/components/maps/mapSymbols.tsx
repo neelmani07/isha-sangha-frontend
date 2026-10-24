@@ -33,8 +33,8 @@ export const symbols: Record<SymbolKind, SymbolStyle> = {
     shape: (fill) =>
       `<circle cx="12" cy="12" r="10.5" fill="${CREAM}" stroke="${fill}" stroke-width="1.6"/><circle cx="12" cy="12" r="7" fill="${fill}"/><circle cx="12" cy="12" r="2.2" fill="${CREAM}"/>`,
   },
-  CITY_CENTER: { label: 'Center', color: '#cf4520', globeColor: '#ff7a45', size: 24, shape: circle(7.5) },
-  CENTER: { label: 'Center', color: '#cf4520', globeColor: '#ff7a45', size: 24, shape: circle(7.5) },
+  CITY_CENTER: { label: 'Centre', color: '#cf4520', globeColor: '#ff7a45', size: 24, shape: circle(7.5) },
+  CENTER: { label: 'Centre', color: '#cf4520', globeColor: '#ff7a45', size: 24, shape: circle(7.5) },
   DEVI_TEMPLE: {
     label: 'Devi temple',
     color: '#a3202f',

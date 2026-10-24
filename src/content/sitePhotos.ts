@@ -53,7 +53,7 @@ export const sitePhotos = {
   },
   nandi: {
     src: commons('2/2c', 'Isha_Yoga_Center_-_Bull.jpg'),
-    alt: 'Nandi at the Isha Yoga Center',
+    alt: 'Nandi at the Isha Yoga Centre',
     credit: { author: 'Natesh Ramasamy', license: 'CC BY 2.0', source: 'https://commons.wikimedia.org/wiki/File:Isha_Yoga_Center_-_Bull.jpg' },
   },
 } satisfies Record<string, SitePhoto>;

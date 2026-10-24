@@ -11,6 +11,7 @@ import { PageHeaderSkeleton } from '../../../components/ui/Skeleton';
 import { EmptyState } from '../../../components/ui/EmptyState';
 import { resourcesApi } from '../../../api/resources';
 import { centerTypeBadge } from '../../../utils/labels';
+import { nav } from '../../../content/copy';
 
 export function CenterPage() {
   const { slug = '' } = useParams();
@@ -31,11 +32,11 @@ export function CenterPage() {
   if (isError || !data) {
     return (
       <DetailPageLayout
-        title="Center not found"
-        description="The center may not exist yet or the backend is not running."
-        breadcrumbs={[{ label: 'Globe', to: '/' }, { label: 'Centers', to: '/centers' }, { label: 'Not found' }]}
+        title="Centre not found"
+        description="We couldn’t find this centre on the map."
+        breadcrumbs={[{ label: nav.explore, to: '/' }, { label: nav.centres, to: '/centers' }, { label: 'Not found' }]}
       >
-        <EmptyState message="Try searching for another center or return to the globe." />
+        <EmptyState message="Try searching for another centre, or go back to Explore." />
       </DetailPageLayout>
     );
   }
@@ -51,8 +52,8 @@ export function CenterPage() {
       badge={data.verified ? `${badge.label} · Verified` : badge.label}
       badgeVariant={badge.variant}
       breadcrumbs={[
-        { label: 'Globe', to: '/' },
-        { label: 'Centers', to: '/centers' },
+        { label: nav.explore, to: '/' },
+        { label: nav.centres, to: '/centers' },
         { label: data.cityName, to: `/search?q=${encodeURIComponent(data.cityName)}` },
         { label: data.name },
       ]}

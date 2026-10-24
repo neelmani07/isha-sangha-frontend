@@ -14,6 +14,7 @@ import { symbols } from '../../../components/maps/mapSymbols';
 import { BackdropPhoto } from '../../../components/ui/BackdropPhoto';
 import { sitePhotos } from '../../../content/sitePhotos';
 import { NightSky } from './NightSky';
+import { labelFor, nav, pages } from '../../../content/copy';
 import {
   filterMarkersForView,
   flyToAltitude,
@@ -38,7 +39,7 @@ const markerFilters: { label: string; value: MarkerFilter; color?: string }[] = 
   { label: 'All', value: 'all' },
   { label: 'Countries', value: 'country', color: symbols.COUNTRY.globeColor },
   { label: 'Cities', value: 'city', color: symbols.CITY.globeColor },
-  { label: 'Centers', value: 'center', color: symbols.CITY_CENTER.globeColor },
+  { label: nav.centres, value: 'center', color: symbols.CITY_CENTER.globeColor },
   { label: 'Teachers', value: 'teacher', color: symbols.TEACHER.globeColor },
   { label: 'Meditators', value: 'meditator', color: symbols.MEDITATOR.globeColor },
 ];
@@ -282,7 +283,7 @@ export function GlobeExplorer({ onJumpToSection }: GlobeExplorerProps) {
       {/* Compact title (small screens) */}
       <div className="pointer-events-none absolute left-4 right-4 top-[calc(var(--header-h)+1.25rem)] z-20 lg:hidden">
         <h1 className="font-display text-3xl font-normal leading-tight text-cream sm:text-4xl">
-          Find Isha <span className="italic text-gold-light">wherever you are</span>
+          {pages.explore.title} <span className="italic text-gold-light">{pages.explore.subtitle}</span>
         </h1>
       </div>
 
@@ -321,14 +322,14 @@ export function GlobeExplorer({ onJumpToSection }: GlobeExplorerProps) {
       {/* One column: intro + filters + search. Bottom-anchored on small screens, vertically centred on the left on large ones. */}
       <div className="absolute bottom-14 left-4 right-4 z-20 lg:bottom-0 lg:top-[var(--header-h)] lg:left-8 lg:right-auto lg:flex lg:w-[min(38%,520px)] lg:flex-col lg:justify-center lg:py-10 xl:left-14">
         <div className="hidden lg:block">
-          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-gold-light/80">Discover</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-gold-light/80">{pages.explore.eyebrow}</p>
           <h1 className="mt-4 font-display text-5xl font-normal leading-[1.05] tracking-tight text-cream xl:text-6xl">
-            Find Isha
-            <span className="mt-1 block italic text-gold-light">wherever you are</span>
+            {pages.explore.title}
+            <span className="mt-1 block italic text-gold-light">{pages.explore.subtitle}</span>
           </h1>
           <Ornament tone="light" className="mt-6 opacity-70" />
           <p className="mt-5 max-w-md text-lg leading-relaxed text-cream/75">
-            Centers, teachers, temples and fellow seekers across the world, and the stories that connect them.
+            {pages.explore.intro}
           </p>
           <HeroStats stats={stats} />
           <div className="mt-8 flex flex-wrap gap-3">
@@ -369,7 +370,7 @@ export function GlobeExplorer({ onJumpToSection }: GlobeExplorerProps) {
           ))}
         </div>
         <form onSubmit={submitSearch}>
-          <SearchField value={query} onChange={setQuery} placeholder="Search cities, centers, teachers" />
+          <SearchField value={query} onChange={setQuery} placeholder={pages.explore.searchPlaceholder} />
         </form>
         <p className="mt-2.5 text-xs text-cream/60">
           {isLoading && 'Loading live markers...'}
@@ -517,7 +518,7 @@ function displayType(marker: GlobeMarker, filter: MarkerFilter) {
     return 'teacher hub';
   }
 
-  return marker.type.replace(/_/g, ' ');
+  return labelFor(marker.type);
 }
 
 function miniInfo(marker: GlobeMarker, filter: MarkerFilter) {
@@ -527,23 +528,23 @@ function miniInfo(marker: GlobeMarker, filter: MarkerFilter) {
   }
 
   if (marker.type === 'COUNTRY') {
-    return `${marker.teacherCount ?? 0} teachers represented in this country-level view.`;
+    return `${marker.teacherCount ?? 0} teachers in this country.`;
   }
 
   if (marker.type === 'CITY') {
     const meditators = marker.meditatorCount ? ` and ${marker.meditatorCount} meditators` : '';
-    return `${marker.teacherCount ?? 0} teachers${meditators} here. Click to open the city page with centers and local statistics.`;
+    return `${marker.teacherCount ?? 0} teachers${meditators} here. Click to see its centres and teachers.`;
   }
 
   if (marker.type === 'TEACHER') {
-    return 'Isha Hatha Yoga teacher marker. Click to open the teacher profile.';
+    return 'An Isha Hatha Yoga teacher. Click to see their profile.';
   }
 
   if (marker.type === 'MEDITATOR') {
-    return 'A member of the community. For privacy, their dot sits at an approximate spot in their city.';
+    return 'A meditator from the sangha. For privacy, their dot sits at an approximate spot in their city.';
   }
 
-  return 'Isha location marker. Click to view center details and contact links.';
+  return 'Click to see opening hours, directions and contacts.';
 }
 
 function primaryActionLabel(marker: GlobeMarker, filter: MarkerFilter) {

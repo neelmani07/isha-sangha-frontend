@@ -2,20 +2,21 @@ import { Link } from 'react-router-dom';
 import { PageLayout } from '../components/layout/PageLayout';
 import { LinkButton } from '../components/ui/Badge';
 import { EmptyState } from '../components/ui/EmptyState';
+import { nav, pages } from '../content/copy';
 
 export function NotFoundPage() {
   return (
     <PageLayout
-      title="Page not found"
-      description="This part of the map hasn't been charted yet. Try searching or return to the globe."
-      breadcrumbs={[{ label: 'Globe', to: '/' }, { label: 'Not found' }]}
+      title={pages.notFound.title}
+      description={pages.notFound.description}
+      breadcrumbs={[{ label: nav.explore, to: '/' }, { label: 'Not found' }]}
     >
       <EmptyState
         title="Lost on the map"
-        message="The page you're looking for doesn't exist or may have moved."
+        message={pages.notFound.message}
         action={
           <div className="flex flex-wrap justify-center gap-3">
-            <LinkButton to="/">Back to globe</LinkButton>
+            <LinkButton to="/">Back to Explore</LinkButton>
             <LinkButton to="/search" variant="secondary">
               Search
             </LinkButton>

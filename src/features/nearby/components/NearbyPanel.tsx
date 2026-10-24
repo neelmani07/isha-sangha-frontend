@@ -10,13 +10,14 @@ import type { NearbyResult } from '../../../types/api';
 import { formatDistance } from '../../../utils/geo';
 import { MapLegend, symbolIcon } from '../../../components/maps/mapSymbols';
 import 'leaflet/dist/leaflet.css';
+import { labelFor } from '../../../content/copy';
 
 const radiusOptions = [25, 50, 100, 250];
 
 const typeFilters: Array<{ label: string; value: string }> = [
   { label: 'All', value: '' },
   { label: 'Teachers', value: 'TEACHER' },
-  { label: 'Centers', value: 'CENTER' },
+  { label: 'Centres', value: 'CENTER' },
   { label: 'Shops', value: 'ISHA_SHOP' },
   { label: 'Temples', value: 'DEVI_TEMPLE' },
   { label: 'Cities', value: 'CITY' },
@@ -126,7 +127,7 @@ export function NearbyPanel() {
 
           <div className="space-y-3">
             {!coords && !loading && (
-              <EmptyCard message="Tap “Use my location” to discover teachers, centers, and shops near you." />
+              <EmptyCard message="Tap “Use my location” to find teachers, centres and temples near you." />
             )}
             {nearbyQuery.isLoading && coords && <EmptyCard message="Searching nearby locations..." />}
             {nearbyQuery.isError && <EmptyCard message="Could not load nearby results. Is the backend running?" />}
@@ -251,7 +252,7 @@ function MapFocus({
 }
 
 function formatNearbyType(type: string) {
-  return type.replace(/_/g, ' ');
+  return labelFor(type);
 }
 
 function nearbyHref(result: NearbyResult) {

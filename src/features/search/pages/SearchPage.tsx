@@ -9,6 +9,7 @@ import { CardSkeleton } from '../../../components/ui/Skeleton';
 import { EmptyState } from '../../../components/ui/EmptyState';
 import { resourcesApi } from '../../../api/resources';
 import { formatEntityType } from '../../../utils/labels';
+import { nav, pages } from '../../../content/copy';
 
 const typeVariants: Record<string, 'default' | 'leaf' | 'gold' | 'shop' | 'temple' | 'sky'> = {
   CITY: 'leaf',
@@ -39,29 +40,29 @@ export function SearchPage() {
   return (
     <PageLayout
       title="Search"
-      description="Find cities, teachers, centers, and communities across the Isha World map."
-      breadcrumbs={[{ label: 'Globe', to: '/' }, { label: 'Search' }]}
+      description={pages.search.description}
+      breadcrumbs={[{ label: nav.explore, to: '/' }, { label: 'Search' }]}
     >
       <form onSubmit={submit}>
         <SearchField
           value={draft}
           onChange={setDraft}
-          placeholder="Search cities, centers, teachers..."
+          placeholder={pages.search.placeholder}
         />
       </form>
 
       <Section title={query ? `Results for “${query}”` : 'Start searching'}>
         {!query && (
           <EmptyState
-            title="Explore the map"
-            message="Enter a city, teacher name, or center to begin your search."
+            title={pages.search.emptyTitle}
+            message={pages.search.emptyMessage}
           />
         )}
         <div className="grid gap-3">
           {isLoading && Array.from({ length: 4 }).map((_, index) => <CardSkeleton key={index} />)}
-          {isError && <EmptyState message="The backend is not reachable yet." />}
+          {isError && <EmptyState message="Search isn’t available just now. Please try again in a moment." />}
           {query && !isLoading && data?.length === 0 && (
-            <EmptyState message="No results found. Try a different search term." />
+            <EmptyState message={pages.search.noResults} />
           )}
           {data?.map((result) => (
             <LinkCard key={`${result.type}-${result.id}`} to={resultHref(result)}>

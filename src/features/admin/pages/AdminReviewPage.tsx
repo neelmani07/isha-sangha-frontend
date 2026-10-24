@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { symbolFor } from '../../../components/maps/mapSymbols';
 import type { ListingStatus } from '../../join/api/joinApi';
 import { adminApi, type ReviewItem } from '../api/adminApi';
+import { centreTypeLabel, teachingModeLabel } from '../../../content/copy';
 
 const tabs: { value: ListingStatus; label: string }[] = [
   { value: 'PENDING', label: 'Waiting' },
@@ -87,14 +88,14 @@ function ReviewCard({ item }: { item: ReviewItem }) {
 
   const details: [string, string | null | undefined][] = item.teacher
     ? [
-        ['Programs', item.teacher.programs.map((p) => p.name).join(', ')],
-        ['Teaches', `${item.teacher.teachingMode.replace('_', ' ').toLowerCase()}${item.teacher.yearsTeaching != null ? ` · ${item.teacher.yearsTeaching} yrs` : ''}`],
+        ['Programmes', item.teacher.programs.map((p) => p.name).join(', ')],
+        ['Teaches', `${teachingModeLabel[item.teacher.teachingMode]}${item.teacher.yearsTeaching != null ? ` · ${item.teacher.yearsTeaching} yrs` : ''}`],
         ['Languages', item.teacher.languages],
         ['Contact', [item.teacher.phone, item.teacher.email, item.teacher.website].filter(Boolean).join(' · ')],
         ['About', item.teacher.bio],
       ]
     : [
-        ['Type', item.center!.type.replace('_', ' ').toLowerCase()],
+        ['Type', centreTypeLabel[item.center!.type]],
         ['Address', item.center!.address],
         ['Hours', item.center!.openingHours],
         ['Contact', [item.center!.phone, item.center!.email, item.center!.website].filter(Boolean).join(' · ')],
