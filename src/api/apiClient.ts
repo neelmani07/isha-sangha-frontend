@@ -122,3 +122,39 @@ async function apiRequest<T>(path: string, init?: RequestInit): Promise<T> {
 
   return payload.data;
 }
+
+/** Multipart upload of a single file (field name "file"). */
+export async function apiUpload<T>(path: string, file: File): Promise<T> {
+  const body = new FormData();
+  body.append('file', file);
+  const token = getUserToken();
+  const response = await fetch(`${API_URL}${path}`, {
+    method: 'POST',
+    body,
+    headers: token ? { Authorization: `Bearer ${token}` } : {},
+  });
+
+  let payload: ApiResponse<T> | null = null;
+  try {
+    payload = (await response.json()) as ApiResponse<T>;
+  } catch {
+    // fall through
+  }
+
+  if (!response.ok || !payload?.success) {
+    throw new ApiError(payload?.message ?? 'Upload failed', response.status);
+  }
+  return payload.data;
+}
+
+/** Fetches a protected admin file (e.g. a proof document) as a blob. */
+export async function apiAdminBlob(path: string): Promise<Blob> {
+  const token = getAdminToken();
+  const response = await fetch(`${API_URL}${path}`, {
+    headers: token ? { Authorization: `Bearer ${token}` } : {},
+  });
+  if (!response.ok) {
+    throw new ApiError('Could not open the file', response.status);
+  }
+  return response.blob();
+}

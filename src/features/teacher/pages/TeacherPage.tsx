@@ -47,8 +47,8 @@ export function TeacherPage() {
       title={data.name}
       subtitle={`Isha Hatha Yoga Teacher · ${data.cityName}`}
       description={data.bio ?? undefined}
-      badge="Teacher"
-      badgeVariant="sky"
+      badge={data.verified ? 'Verified teacher' : 'Teacher'}
+      badgeVariant={data.verified ? 'leaf' : 'sky'}
       heroImageUrl={data.photoUrl}
       breadcrumbs={[
         { label: 'Globe', to: '/' },

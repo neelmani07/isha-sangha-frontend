@@ -14,10 +14,11 @@ export function AdminDashboardPage() {
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
           <h1 className="font-display text-4xl font-semibold">Admin Dashboard</h1>
-          <p className="mt-2 text-ink/70">Manage the Isha World geography, teachers, centers, and feedback data.</p>
+          <p className="mt-2 text-ink/70">Manage places, teachers, centers and member submissions.</p>
         </div>
         <div className="flex gap-2">
-          <Link to="/" className="border border-ink/15 px-4 py-3 text-sm font-semibold">Public globe</Link>
+          <Link to="/admin/review" className="bg-saffron px-4 py-3 text-sm font-semibold text-cream">Review submissions</Link>
+          <Link to="/" className="border border-ink/15 px-4 py-3 text-sm font-semibold">Public site</Link>
           <button onClick={clearAdminToken} className="bg-ink px-4 py-3 text-sm font-semibold text-cloud">Logout</button>
         </div>
       </div>

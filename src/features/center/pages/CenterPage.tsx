@@ -48,7 +48,7 @@ export function CenterPage() {
       title={data.name}
       subtitle={data.cityName}
       description={data.description ?? undefined}
-      badge={badge.label}
+      badge={data.verified ? `${badge.label} · Verified` : badge.label}
       badgeVariant={badge.variant}
       breadcrumbs={[
         { label: 'Globe', to: '/' },

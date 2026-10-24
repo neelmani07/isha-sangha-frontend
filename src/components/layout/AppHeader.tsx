@@ -1,4 +1,4 @@
-import { BookHeart, Globe2, HandCoins, Lightbulb, LogOut, Menu, X } from 'lucide-react';
+import { BookHeart, Globe2, HandCoins, Lightbulb, LogOut, MapPinPlus, Menu, UserRound, X } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../../features/auth/context/AuthContext';
@@ -171,6 +171,22 @@ function AccountControl({ transparent }: { transparent: boolean }) {
       {menuOpen && (
         <div role="menu" className="absolute right-0 mt-2 w-60 animate-fade-in rounded-lg border border-border bg-white p-2 shadow-panel">
           <p className="truncate px-3 py-2 text-xs text-muted">{user.email}</p>
+          <Link
+            to="/me"
+            role="menuitem"
+            onClick={() => setMenuOpen(false)}
+            className="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-semibold text-ink hover:bg-sand"
+          >
+            <UserRound size={16} /> My profile & listings
+          </Link>
+          <Link
+            to="/join"
+            role="menuitem"
+            onClick={() => setMenuOpen(false)}
+            className="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-semibold text-ink hover:bg-sand"
+          >
+            <MapPinPlus size={16} /> Join the map
+          </Link>
           <button
             type="button"
             role="menuitem"

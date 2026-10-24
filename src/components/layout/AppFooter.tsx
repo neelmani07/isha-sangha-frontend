@@ -19,6 +19,7 @@ const columns = [
     links: [
       { to: '/stories', label: 'Stories' },
       { to: '/initiatives', label: 'Your Initiatives' },
+      { to: '/join', label: 'Join the map' },
       { to: '/donate', label: 'Donate' },
       { to: '/feedback', label: 'Feedback' },
     ],

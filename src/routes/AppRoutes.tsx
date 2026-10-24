@@ -16,6 +16,12 @@ import { TeachersPage } from '../features/teacher/pages/TeachersPage';
 import { InitiativePage } from '../features/initiatives/pages/InitiativePage';
 import { InitiativesPage } from '../features/initiatives/pages/InitiativesPage';
 import { StoryPage } from '../features/stories/pages/StoryPage';
+import { AdminReviewPage } from '../features/admin/pages/AdminReviewPage';
+import { CenterSubmissionPage } from '../features/join/pages/CenterSubmissionPage';
+import { JoinPage } from '../features/join/pages/JoinPage';
+import { MeditatorProfilePage } from '../features/join/pages/MeditatorProfilePage';
+import { MyAccountPage } from '../features/join/pages/MyAccountPage';
+import { TeacherSubmissionPage } from '../features/join/pages/TeacherSubmissionPage';
 
 export function AppRoutes() {
   return (
@@ -39,11 +45,21 @@ export function AppRoutes() {
         <Route path="volunteers" element={<Navigate to="/initiatives" replace />} />
         <Route path="donate" element={<DonatePage />} />
 
+        {/* Joining the map */}
+        <Route path="join" element={<JoinPage />} />
+        <Route path="join/meditator" element={<MeditatorProfilePage />} />
+        <Route path="join/teacher" element={<TeacherSubmissionPage />} />
+        <Route path="join/teacher/:id" element={<TeacherSubmissionPage />} />
+        <Route path="join/center" element={<CenterSubmissionPage />} />
+        <Route path="join/center/:id" element={<CenterSubmissionPage />} />
+        <Route path="me" element={<MyAccountPage />} />
+
         <Route path="feedback" element={<FeedbackPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
       <Route path="admin" element={<AdminDashboardPage />} />
       <Route path="admin/login" element={<AdminLoginPage />} />
+      <Route path="admin/review" element={<AdminReviewPage />} />
     </Routes>
   );
 }

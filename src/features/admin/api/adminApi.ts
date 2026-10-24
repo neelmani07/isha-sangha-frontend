@@ -1,5 +1,18 @@
-import { apiDelete, apiGet, apiPost, apiPut, type PageResponse, setAdminToken } from '../../../api/apiClient';
+import { apiAdminBlob, apiDelete, apiGet, apiPost, apiPut, type PageResponse, setAdminToken } from '../../../api/apiClient';
 import type { Center, City, Country, Program, Teacher } from '../../../types/api';
+import type { ListingKind, ListingStatus } from '../../join/api/joinApi';
+
+export type ReviewItem = {
+  kind: ListingKind;
+  id: number;
+  status: ListingStatus;
+  submittedByEmail: string;
+  proofKey: string | null;
+  submittedAt: string;
+  rejectionReason: string | null;
+  teacher: Teacher | null;
+  center: Center | null;
+};
 
 type LoginResponse = {
   token: string;
@@ -30,6 +43,11 @@ export const adminApi = {
   createTeacher: (body: unknown) => apiPost<Teacher>('/admin/teachers', body),
   createProgram: (body: unknown) => apiPost<Program>('/admin/programs', body),
   updateCountry: (id: number, body: Partial<Country>) => apiPut<Country>(`/admin/countries/${id}`, body),
+  reviewQueue: (status: ListingStatus) => apiGet<ReviewItem[]>(`/admin/listings?status=${status}`),
+  approveListing: (kind: ListingKind, id: number) => apiPost<null>(`/admin/listings/${kind.toLowerCase()}/${id}/approve`, {}),
+  rejectListing: (kind: ListingKind, id: number, reason: string) =>
+    apiPost<null>(`/admin/listings/${kind.toLowerCase()}/${id}/reject`, { reason }),
+  proof: (key: string) => apiAdminBlob(`/admin/proofs/${encodeURIComponent(key)}`),
   deleteCountry: (id: number) => apiDelete<void>(`/admin/countries/${id}`),
 };
 

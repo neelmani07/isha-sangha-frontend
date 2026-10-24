@@ -40,6 +40,7 @@ export function ExplorePage() {
         eyebrow="Near me"
         title="Find Isha near you"
         subtitle="teachers, centers and temples close by"
+        action={<SeeAll to="/join" label="Add yourself to the map" />}
       >
         <NearbyPanel />
       </ExploreSection>

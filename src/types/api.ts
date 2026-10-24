@@ -53,6 +53,10 @@ export type Center = {
   email: string | null;
   website: string | null;
   active: boolean;
+  openingHours: string | null;
+  photoUrl: string | null;
+  languages: string | null;
+  verified: boolean;
 };
 
 export type Program = {
@@ -76,7 +80,13 @@ export type Teacher = {
   website: string | null;
   active: boolean;
   programs: Program[];
+  teachingMode: TeachingMode;
+  languages: string | null;
+  yearsTeaching: number | null;
+  verified: boolean;
 };
+
+export type TeachingMode = 'IN_PERSON' | 'ONLINE' | 'BOTH';
 
 export type SearchResult = {
   type: 'COUNTRY' | 'STATE' | 'CITY' | 'CENTER' | 'TEACHER';
