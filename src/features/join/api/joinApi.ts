@@ -8,12 +8,17 @@ import type {
   Meditator,
   ResourceCategory,
   ResourceLink,
+  ShopCategory,
+  ShopDelivery,
+  ShopListing,
+  Story,
+  StoryCategory,
   Teacher,
   TeachingMode,
 } from '../../../types/api';
 
 export type ListingStatus = 'PENDING' | 'APPROVED' | 'REJECTED';
-export type ListingKind = 'TEACHER' | 'CENTER' | 'INITIATIVE' | 'RESOURCE';
+export type ListingKind = 'TEACHER' | 'CENTER' | 'INITIATIVE' | 'RESOURCE' | 'CITY' | 'STORY' | 'PRODUCT';
 
 export type MyListing = {
   kind: ListingKind;
@@ -34,6 +39,34 @@ export type OwnListing = {
   center: Center | null;
   initiative: Initiative | null;
   resource: ResourceLink | null;
+  story: Story | null;
+  product: ShopListing | null;
+};
+
+export type ProductSubmission = {
+  title: string;
+  category: ShopCategory;
+  description?: string;
+  priceAmount?: number;
+  priceNote?: string;
+  delivery: ShopDelivery;
+  cityId: number;
+  sellerName?: string;
+  contactWhatsapp?: string;
+  contactPhone?: string;
+  contactEmail?: string;
+  contactWebsite?: string;
+  photoKey?: string;
+  rulesConfirmed: boolean;
+};
+
+export type StorySubmission = {
+  title: string;
+  category: StoryCategory;
+  body: string;
+  authorName?: string;
+  cityId?: number;
+  photoKey?: string;
 };
 
 export type InitiativeSubmission = {
@@ -112,6 +145,12 @@ export const joinApi = {
   myListings: () => apiGet<MyListing[]>('/me/listings'),
   uploadProof: (file: File) => apiUpload<{ proofKey: string }>('/me/proofs', file),
   uploadImage: (file: File) => apiUpload<{ imageKey: string; url: string }>('/me/images', file),
+  ownProduct: (id: number) => apiGet<OwnListing>(`/me/listings/products/${id}`),
+  submitProduct: (body: ProductSubmission) => apiPost<MyListing>('/me/listings/products', body),
+  updateProduct: (id: number, body: ProductSubmission) => apiPut<MyListing>(`/me/listings/products/${id}`, body),
+  ownStory: (id: number) => apiGet<OwnListing>(`/me/listings/stories/${id}`),
+  submitStory: (body: StorySubmission) => apiPost<MyListing>('/me/listings/stories', body),
+  updateStory: (id: number, body: StorySubmission) => apiPut<MyListing>(`/me/listings/stories/${id}`, body),
   ownInitiative: (id: number) => apiGet<OwnListing>(`/me/listings/initiatives/${id}`),
   submitInitiative: (body: InitiativeSubmission) => apiPost<MyListing>('/me/listings/initiatives', body),
   updateInitiative: (id: number, body: InitiativeSubmission) => apiPut<MyListing>(`/me/listings/initiatives/${id}`, body),

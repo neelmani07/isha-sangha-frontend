@@ -8,8 +8,8 @@ export function Input({ className = '', ...props }: InputHTMLAttributes<HTMLInpu
   return <input className={`${fieldClass} ${className}`} {...props} />;
 }
 
-export function Textarea(props: TextareaHTMLAttributes<HTMLTextAreaElement>) {
-  return <textarea className={`${fieldClass} min-h-40 resize-y`} {...props} />;
+export function Textarea({ className = 'min-h-40', ...props }: TextareaHTMLAttributes<HTMLTextAreaElement>) {
+  return <textarea className={`${fieldClass} resize-y ${className}`} {...props} />;
 }
 
 export function Select(props: SelectHTMLAttributes<HTMLSelectElement>) {

@@ -1,4 +1,4 @@
-import { BookHeart, Globe2, HandCoins, Library, Lightbulb, LogOut, MapPinPlus, Menu, UserRound, X } from 'lucide-react';
+import { BookHeart, Globe2, HandCoins, Library, Lightbulb, LogOut, MapPinPlus, Menu, Store, UserRound, X } from 'lucide-react';
 import { nav } from '../../content/copy';
 import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
@@ -14,6 +14,7 @@ const navItems = [
   { to: '/stories', label: nav.stories, icon: BookHeart, isActive: (path: string) => path.startsWith('/stories') },
   { to: '/initiatives', label: nav.initiatives, icon: Lightbulb, isActive: (path: string) => path.startsWith('/initiatives') },
   { to: '/resources', label: nav.resources, icon: Library, isActive: (path: string) => path.startsWith('/resources') },
+  { to: '/shop', label: nav.shop, icon: Store, isActive: (path: string) => path.startsWith('/shop') },
   { to: '/donate', label: nav.donate, icon: HandCoins, isActive: (path: string) => path.startsWith('/donate') },
 ];
 
@@ -27,7 +28,8 @@ export function isOverlayRoute(path: string) {
     path.startsWith('/stories') ||
     path.startsWith('/initiatives') ||
     path.startsWith('/donate') ||
-    path === '/resources'
+    path === '/resources' ||
+    path === '/shop'
   );
 }
 

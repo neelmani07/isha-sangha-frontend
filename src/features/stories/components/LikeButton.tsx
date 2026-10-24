@@ -1,41 +1,32 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Heart } from 'lucide-react';
-import { useState } from 'react';
+import type { Story } from '../../../types/api';
+import { useAuth } from '../../auth/context/AuthContext';
+import { storiesApi } from '../api/storiesApi';
 
-const STORAGE_KEY = 'isha-sample-story-likes';
-
-function readLikes(): Record<string, boolean> {
-  try {
-    return JSON.parse(window.localStorage.getItem(STORAGE_KEY) ?? '{}');
-  } catch {
-    return {};
-  }
-}
-
-/**
- * Like toggle for sample stories. Likes are remembered in this browser only; real likes
- * (one per signed-in user) arrive with the Stories backend.
- */
-export function LikeButton({ slug, baseCount, size = 'md' }: { slug: string; baseCount: number; size?: 'sm' | 'md' }) {
-  const [liked, setLiked] = useState(() => Boolean(readLikes()[slug]));
-
-  function toggle(event: React.MouseEvent) {
-    event.preventDefault();
-    event.stopPropagation();
-    const next = !liked;
-    setLiked(next);
-    try {
-      const likes = readLikes();
-      likes[slug] = next;
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(likes));
-    } catch {
-      // Storage unavailable: the like still shows for this visit.
-    }
-  }
+/** One like per member; asks visitors to sign in first. */
+export function LikeButton({ story, size = 'md' }: { story: Story; size?: 'sm' | 'md' }) {
+  const { user, openSignIn } = useAuth();
+  const queryClient = useQueryClient();
+  const toggle = useMutation({
+    mutationFn: () => (story.likedByMe ? storiesApi.unlike(story.id) : storiesApi.like(story.id)),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['stories'] });
+      queryClient.invalidateQueries({ queryKey: ['story', story.slug] });
+    },
+  });
+  const liked = story.likedByMe;
 
   return (
     <button
       type="button"
-      onClick={toggle}
+      onClick={(event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        if (!user) openSignIn();
+        else toggle.mutate();
+      }}
+      disabled={toggle.isPending}
       aria-pressed={liked}
       aria-label={liked ? 'Unlike story' : 'Like story'}
       className={`inline-flex items-center gap-1.5 rounded-pill border font-semibold transition ${
@@ -43,7 +34,7 @@ export function LikeButton({ slug, baseCount, size = 'md' }: { slug: string; bas
       } ${liked ? 'border-saffron/30 bg-saffron-light text-saffron-dark' : 'border-border bg-white text-muted hover:border-saffron/40 hover:text-saffron-dark'}`}
     >
       <Heart size={size === 'sm' ? 14 : 16} className={liked ? 'fill-saffron text-saffron' : ''} />
-      {(baseCount + (liked ? 1 : 0)).toLocaleString()}
+      {story.likes.toLocaleString()}
     </button>
   );
 }

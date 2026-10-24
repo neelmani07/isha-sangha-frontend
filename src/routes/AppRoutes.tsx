@@ -1,4 +1,7 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
+import { ProductPage } from '../features/shop/pages/ProductPage';
+import { SellProductPage } from '../features/shop/pages/SellProductPage';
+import { ShopPage } from '../features/shop/pages/ShopPage';
 import { PublicLayout } from '../layouts/PublicLayout';
 import { AdminDashboardPage } from '../features/admin/pages/AdminDashboardPage';
 import { AdminLoginPage } from '../features/admin/pages/AdminLoginPage';
@@ -16,7 +19,9 @@ import { TeachersPage } from '../features/teacher/pages/TeachersPage';
 import { InitiativePage } from '../features/initiatives/pages/InitiativePage';
 import { InitiativesPage } from '../features/initiatives/pages/InitiativesPage';
 import { StoryPage } from '../features/stories/pages/StoryPage';
+import { ShareStoryPage } from '../features/stories/pages/ShareStoryPage';
 import { AdminReviewPage } from '../features/admin/pages/AdminReviewPage';
+import { AdminManagePage } from '../features/admin/pages/AdminManagePage';
 import { CenterSubmissionPage } from '../features/join/pages/CenterSubmissionPage';
 import { JoinPage } from '../features/join/pages/JoinPage';
 import { MeditatorProfilePage } from '../features/join/pages/MeditatorProfilePage';
@@ -42,6 +47,8 @@ export function AppRoutes() {
 
         {/* Community */}
         <Route path="stories" element={<StoriesPage />} />
+        <Route path="stories/share" element={<ShareStoryPage />} />
+        <Route path="stories/share/:id" element={<ShareStoryPage />} />
         <Route path="stories/:slug" element={<StoryPage />} />
         <Route path="initiatives" element={<InitiativesPage />} />
         <Route path="initiatives/:slug" element={<InitiativePage />} />
@@ -49,6 +56,10 @@ export function AppRoutes() {
         <Route path="resources" element={<ResourcesPage />} />
         <Route path="resources/suggest" element={<SuggestResourcePage />} />
         <Route path="resources/suggest/:id" element={<SuggestResourcePage />} />
+        <Route path="shop" element={<ShopPage />} />
+        <Route path="shop/sell" element={<SellProductPage />} />
+        <Route path="shop/sell/:id" element={<SellProductPage />} />
+        <Route path="shop/:slug" element={<ProductPage />} />
         <Route path="donate" element={<DonatePage />} />
 
         {/* Joining the map */}
@@ -68,6 +79,7 @@ export function AppRoutes() {
       <Route path="admin" element={<AdminDashboardPage />} />
       <Route path="admin/login" element={<AdminLoginPage />} />
       <Route path="admin/review" element={<AdminReviewPage />} />
+      <Route path="admin/manage" element={<AdminManagePage />} />
     </Routes>
   );
 }

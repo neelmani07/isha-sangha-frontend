@@ -13,13 +13,14 @@ import { InitiativeCard } from '../../initiatives/components/InitiativeCard';
 import { initiativesApi } from '../../initiatives/api/initiativesApi';
 import { NearbyPanel } from '../../nearby/components/NearbyPanel';
 import { StoryCard } from '../../stories/components/StoryCard';
-import { sampleStories } from '../../stories/data/sampleStories';
+import { storiesApi } from '../../stories/api/storiesApi';
 import { pages } from '../../../content/copy';
 
 /** Explore is one long page: globe hero, then Near me, Search & browse, and community stories. */
 export function ExplorePage() {
   const location = useLocation();
   const latestInitiatives = useQuery({ queryKey: ['initiatives'], queryFn: initiativesApi.list });
+  const latestStories = useQuery({ queryKey: ['stories'], queryFn: storiesApi.list });
 
   const jumpTo = useCallback((sectionId: string) => {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -67,7 +68,7 @@ export function ExplorePage() {
         action={<SeeAll to="/stories" label="All stories" />}
       >
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {sampleStories.slice(0, 3).map((story) => (
+          {(latestStories.data ?? []).slice(0, 3).map((story) => (
             <StoryCard key={story.slug} story={story} />
           ))}
         </div>

@@ -14,6 +14,9 @@ const kindMeta: Record<
   TEACHER: { label: 'Teacher', color: symbolFor('TEACHER').color, publicHref: (l) => `/teacher/${l.slug}`, editHref: (l) => `/join/teacher/${l.id}` },
   CENTER: { label: 'Place', color: symbolFor('CITY_CENTER').color, publicHref: (l) => `/center/${l.slug}`, editHref: (l) => `/join/center/${l.id}` },
   INITIATIVE: { label: 'Initiative', color: '#0b4a63', publicHref: (l) => `/initiatives/${l.slug}`, editHref: (l) => `/join/initiative/${l.id}` },
+  STORY: { label: 'Story', color: '#5e2614', publicHref: (l) => `/stories/${l.slug}`, editHref: (l) => `/stories/share/${l.id}` },
+  PRODUCT: { label: 'Shop item', color: '#b8862b', publicHref: (l) => `/shop/${l.slug}`, editHref: (l) => `/shop/sell/${l.id}` },
+  CITY: { label: 'City', color: '#28231e', publicHref: () => '/', editHref: () => '/me' },
   RESOURCE: { label: 'Resource link', color: '#b8862b', publicHref: () => '/resources', editHref: (l) => `/resources/suggest/${l.id}` },
 };
 

@@ -20,6 +20,7 @@ const columns = [
       { to: '/stories', label: 'Stories' },
       { to: '/initiatives', label: 'Initiatives' },
       { to: '/resources', label: 'Resources' },
+      { to: '/shop', label: 'Sangha Shop' },
       { to: '/join', label: 'Join the map' },
       { to: '/donate', label: 'Donate' },
       { to: '/feedback', label: 'Feedback' },

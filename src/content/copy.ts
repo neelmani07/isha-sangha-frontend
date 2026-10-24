@@ -70,6 +70,7 @@ export const nav = {
   stories: 'Stories',
   initiatives: 'Initiatives',
   resources: 'Resources',
+  shop: 'Shop',
   donate: 'Donate',
   join: 'Join the map',
   myProfile: 'My profile & listings',
