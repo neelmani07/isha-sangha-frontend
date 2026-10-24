@@ -128,3 +128,51 @@ export type NearbyResult = {
   citySlug: string | null;
 };
 
+
+export type InitiativeKind = 'WELLBEING' | 'ENVIRONMENT' | 'EDUCATION' | 'SEVA' | 'VENTURE';
+export type InitiativeNeed = 'VOLUNTEERS' | 'FUNDS' | 'SPACE' | 'SKILLS' | 'MATERIALS';
+
+export type Initiative = {
+  id: number;
+  slug: string;
+  title: string;
+  kind: InitiativeKind;
+  summary: string;
+  description: string | null;
+  cityId: number;
+  cityName: string;
+  citySlug: string;
+  lat: number | null;
+  lng: number | null;
+  startedYear: number | null;
+  startedByName: string | null;
+  needs: InitiativeNeed[];
+  needsNote: string | null;
+  contactWhatsapp: string | null;
+  contactEmail: string | null;
+  contactWebsite: string | null;
+  photoUrl: string | null;
+  supporters: number;
+  supportedByMe: boolean;
+};
+
+export type InitiativeStats = { initiatives: number; supporters: number; places: number };
+
+export type ResourceCategory = 'PROGRAMMES' | 'SEVA' | 'APPS' | 'READING' | 'VIDEOS' | 'GROUPS' | 'OTHER';
+
+export type ResourceLink = {
+  id: number;
+  title: string;
+  /** Null for members-only links when the visitor is not signed in. */
+  url: string | null;
+  host: string | null;
+  description: string | null;
+  category: ResourceCategory;
+  membersOnly: boolean;
+  cityId: number | null;
+  cityName: string | null;
+  language: string | null;
+  helpful: number;
+  helpfulByMe: boolean;
+  sharedAt: string;
+};

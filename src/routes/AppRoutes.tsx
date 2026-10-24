@@ -22,6 +22,9 @@ import { JoinPage } from '../features/join/pages/JoinPage';
 import { MeditatorProfilePage } from '../features/join/pages/MeditatorProfilePage';
 import { MyAccountPage } from '../features/join/pages/MyAccountPage';
 import { TeacherSubmissionPage } from '../features/join/pages/TeacherSubmissionPage';
+import { InitiativeSubmissionPage } from '../features/join/pages/InitiativeSubmissionPage';
+import { ResourcesPage } from '../features/resources/pages/ResourcesPage';
+import { SuggestResourcePage } from '../features/resources/pages/SuggestResourcePage';
 
 export function AppRoutes() {
   return (
@@ -43,6 +46,9 @@ export function AppRoutes() {
         <Route path="initiatives" element={<InitiativesPage />} />
         <Route path="initiatives/:slug" element={<InitiativePage />} />
         <Route path="volunteers" element={<Navigate to="/initiatives" replace />} />
+        <Route path="resources" element={<ResourcesPage />} />
+        <Route path="resources/suggest" element={<SuggestResourcePage />} />
+        <Route path="resources/suggest/:id" element={<SuggestResourcePage />} />
         <Route path="donate" element={<DonatePage />} />
 
         {/* Joining the map */}
@@ -52,6 +58,8 @@ export function AppRoutes() {
         <Route path="join/teacher/:id" element={<TeacherSubmissionPage />} />
         <Route path="join/center" element={<CenterSubmissionPage />} />
         <Route path="join/center/:id" element={<CenterSubmissionPage />} />
+        <Route path="join/initiative" element={<InitiativeSubmissionPage />} />
+        <Route path="join/initiative/:id" element={<InitiativeSubmissionPage />} />
         <Route path="me" element={<MyAccountPage />} />
 
         <Route path="feedback" element={<FeedbackPage />} />

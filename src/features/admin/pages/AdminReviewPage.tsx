@@ -2,10 +2,13 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { ArrowLeft, Check, ExternalLink, FileText, X } from 'lucide-react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { mediaUrl } from '../../../api/apiClient';
 import { symbolFor } from '../../../components/maps/mapSymbols';
 import type { ListingStatus } from '../../join/api/joinApi';
 import { adminApi, type ReviewItem } from '../api/adminApi';
 import { centreTypeLabel, teachingModeLabel } from '../../../content/copy';
+import { kindLabel, needLabel } from '../../initiatives/labels';
+import { categoryLabel } from '../../resources/api/resourcesLibraryApi';
 
 const tabs: { value: ListingStatus; label: string }[] = [
   { value: 'PENDING', label: 'Waiting' },
@@ -25,7 +28,7 @@ export function AdminReviewPage() {
           <ArrowLeft size={16} /> Admin dashboard
         </Link>
         <h1 className="mt-4 font-display text-4xl">Review submissions</h1>
-        <p className="mt-2 text-muted">Check each proof, then approve (it goes live with a verified badge) or send it back with a note.</p>
+        <p className="mt-2 text-muted">Check each submission (and its proof, for teachers and places), then approve it or send it back with a note.</p>
 
         <div className="mt-6 inline-flex rounded-md border border-border bg-white p-1 text-sm font-semibold" role="tablist">
           {tabs.map((tab) => (
@@ -66,9 +69,17 @@ function ReviewCard({ item }: { item: ReviewItem }) {
   const approve = useMutation({ mutationFn: () => adminApi.approveListing(item.kind, item.id), onSuccess: refresh });
   const reject = useMutation({ mutationFn: () => adminApi.rejectListing(item.kind, item.id, reason.trim()), onSuccess: refresh });
 
-  const listing = item.teacher ?? item.center;
-  if (!listing) return null;
-  const symbol = symbolFor(item.teacher ? 'TEACHER' : item.center!.type);
+  const heading = item.teacher?.name ?? item.center?.name ?? item.initiative?.title ?? item.resource?.title;
+  if (!heading) return null;
+  const where = item.teacher?.cityName ?? item.center?.cityName ?? item.initiative?.cityName ?? item.resource?.cityName;
+  const kind = item.teacher ? 'Teacher' : item.center ? 'Place' : item.initiative ? 'Initiative' : 'Resource link';
+  const color = item.teacher
+    ? symbolFor('TEACHER').color
+    : item.center
+      ? symbolFor(item.center.type).color
+      : item.initiative
+        ? '#0b4a63'
+        : '#b8862b';
 
   async function openProof() {
     if (!item.proofKey) return;
@@ -86,7 +97,23 @@ function ReviewCard({ item }: { item: ReviewItem }) {
     }
   }
 
-  const details: [string, string | null | undefined][] = item.teacher
+  const details: [string, string | null | undefined][] = item.initiative
+    ? [
+        ['Kind', kindLabel[item.initiative.kind]],
+        ['Summary', item.initiative.summary],
+        ['Needs', item.initiative.needs.map((n) => needLabel[n]).join(', ')],
+        ['Started by', item.initiative.startedByName],
+        ['Contact', [item.initiative.contactWhatsapp && `WhatsApp +${item.initiative.contactWhatsapp}`, item.initiative.contactEmail, item.initiative.contactWebsite].filter(Boolean).join(' · ')],
+        ['Story', item.initiative.description],
+      ]
+    : item.resource
+    ? [
+        ['Category', categoryLabel[item.resource.category]],
+        ['Link', item.resource.url],
+        ['Visibility', item.resource.membersOnly ? 'Members only' : 'Everyone'],
+        ['Why useful', item.resource.description],
+      ]
+    : item.teacher
     ? [
         ['Programmes', item.teacher.programs.map((p) => p.name).join(', ')],
         ['Teaches', `${teachingModeLabel[item.teacher.teachingMode]}${item.teacher.yearsTeaching != null ? ` · ${item.teacher.yearsTeaching} yrs` : ''}`],
@@ -106,15 +133,36 @@ function ReviewCard({ item }: { item: ReviewItem }) {
     <article className="rounded-xl border border-border bg-white p-5 shadow-card sm:p-6">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.16em]" style={{ color: symbol.color }}>
-            {item.teacher ? 'Teacher' : 'Place'} · {listing.cityName}
+          <p className="text-xs font-semibold uppercase tracking-[0.16em]" style={{ color }}>
+            {kind}
+            {where ? ` · ${where}` : ''}
           </p>
-          <p className="mt-1 font-display text-2xl">{listing.name}</p>
+          <p className="mt-1 font-display text-2xl">{heading}</p>
           <p className="text-sm text-muted">
             Submitted by {item.submittedByEmail} on {new Date(item.submittedAt).toLocaleDateString('en-IN')}
           </p>
         </div>
-        {item.proofKey && (
+        {item.resource?.url && (
+          <a
+            href={item.resource.url}
+            target="_blank"
+            rel="noreferrer noopener"
+            className="inline-flex items-center gap-2 rounded-md border border-gold/50 bg-gold-light/50 px-3 py-2 text-sm font-semibold text-maroon hover:bg-gold-light"
+          >
+            Open link <ExternalLink size={13} />
+          </a>
+        )}
+        {item.initiative?.photoUrl && (
+          <a
+            href={mediaUrl(item.initiative.photoUrl) ?? undefined}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 rounded-md border border-border px-3 py-2 text-sm font-semibold text-ink hover:border-saffron/40"
+          >
+            View photo <ExternalLink size={13} />
+          </a>
+        )}
+        {item.proofKey && (item.teacher || item.center) && (
           <button
             type="button"
             onClick={openProof}

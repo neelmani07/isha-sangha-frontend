@@ -1,8 +1,19 @@
 import { apiDelete, apiGet, apiPost, apiPut, apiUpload } from '../../../api/apiClient';
-import type { Center, CenterType, Meditator, Teacher, TeachingMode } from '../../../types/api';
+import type {
+  Center,
+  CenterType,
+  Initiative,
+  InitiativeKind,
+  InitiativeNeed,
+  Meditator,
+  ResourceCategory,
+  ResourceLink,
+  Teacher,
+  TeachingMode,
+} from '../../../types/api';
 
 export type ListingStatus = 'PENDING' | 'APPROVED' | 'REJECTED';
-export type ListingKind = 'TEACHER' | 'CENTER';
+export type ListingKind = 'TEACHER' | 'CENTER' | 'INITIATIVE' | 'RESOURCE';
 
 export type MyListing = {
   kind: ListingKind;
@@ -21,6 +32,34 @@ export type OwnListing = {
   proofKey: string;
   teacher: Teacher | null;
   center: Center | null;
+  initiative: Initiative | null;
+  resource: ResourceLink | null;
+};
+
+export type InitiativeSubmission = {
+  title: string;
+  kind: InitiativeKind;
+  summary: string;
+  description?: string;
+  cityId: number;
+  startedYear?: number;
+  startedByName?: string;
+  needs: InitiativeNeed[];
+  needsNote?: string;
+  contactWhatsapp?: string;
+  contactEmail?: string;
+  contactWebsite?: string;
+  photoKey?: string;
+};
+
+export type ResourceSubmission = {
+  title: string;
+  url: string;
+  description?: string;
+  category: ResourceCategory;
+  cityId?: number;
+  language?: string;
+  membersOnly: boolean;
 };
 
 export type MeditatorProfileInput = {
@@ -72,6 +111,13 @@ export const joinApi = {
   deleteMeditator: () => apiDelete<null>('/me/meditator'),
   myListings: () => apiGet<MyListing[]>('/me/listings'),
   uploadProof: (file: File) => apiUpload<{ proofKey: string }>('/me/proofs', file),
+  uploadImage: (file: File) => apiUpload<{ imageKey: string; url: string }>('/me/images', file),
+  ownInitiative: (id: number) => apiGet<OwnListing>(`/me/listings/initiatives/${id}`),
+  submitInitiative: (body: InitiativeSubmission) => apiPost<MyListing>('/me/listings/initiatives', body),
+  updateInitiative: (id: number, body: InitiativeSubmission) => apiPut<MyListing>(`/me/listings/initiatives/${id}`, body),
+  ownResource: (id: number) => apiGet<OwnListing>(`/me/listings/resources/${id}`),
+  submitResource: (body: ResourceSubmission) => apiPost<MyListing>('/me/listings/resources', body),
+  updateResource: (id: number, body: ResourceSubmission) => apiPut<MyListing>(`/me/listings/resources/${id}`, body),
   ownTeacher: (id: number) => apiGet<OwnListing>(`/me/listings/teachers/${id}`),
   ownCenter: (id: number) => apiGet<OwnListing>(`/me/listings/centers/${id}`),
   submitTeacher: (body: TeacherSubmission) => apiPost<MyListing>('/me/listings/teachers', body),

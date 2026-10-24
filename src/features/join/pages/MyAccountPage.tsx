@@ -4,8 +4,18 @@ import { Link } from 'react-router-dom';
 import { ApiError } from '../../../api/apiClient';
 import { symbolFor } from '../../../components/maps/mapSymbols';
 import { useAuth } from '../../auth/context/AuthContext';
-import { joinApi, type ListingStatus, type MyListing } from '../api/joinApi';
+import { joinApi, type ListingKind, type ListingStatus, type MyListing } from '../api/joinApi';
 import { JoinLayout } from '../components/JoinLayout';
+
+const kindMeta: Record<
+  ListingKind,
+  { label: string; color: string; publicHref: (l: MyListing) => string; editHref: (l: MyListing) => string }
+> = {
+  TEACHER: { label: 'Teacher', color: symbolFor('TEACHER').color, publicHref: (l) => `/teacher/${l.slug}`, editHref: (l) => `/join/teacher/${l.id}` },
+  CENTER: { label: 'Place', color: symbolFor('CITY_CENTER').color, publicHref: (l) => `/center/${l.slug}`, editHref: (l) => `/join/center/${l.id}` },
+  INITIATIVE: { label: 'Initiative', color: '#0b4a63', publicHref: (l) => `/initiatives/${l.slug}`, editHref: (l) => `/join/initiative/${l.id}` },
+  RESOURCE: { label: 'Resource link', color: '#b8862b', publicHref: () => '/resources', editHref: (l) => `/resources/suggest/${l.id}` },
+};
 
 const statusStyle: Record<ListingStatus, { label: string; className: string; icon: typeof Clock }> = {
   PENDING: { label: 'Waiting for review', className: 'bg-gold-light text-maroon', icon: Clock },
@@ -66,7 +76,7 @@ export function MyAccountPage() {
 
         <section>
           <div className="flex flex-wrap items-end justify-between gap-3">
-            <h2 className="font-display text-2xl">Teachers and places you've submitted</h2>
+            <h2 className="font-display text-2xl">What you've submitted</h2>
             <Link to="/join" className="inline-flex items-center gap-1.5 text-sm font-semibold text-saffron-dark hover:text-saffron">
               <Plus size={16} /> Add another
             </Link>
@@ -83,18 +93,17 @@ export function MyAccountPage() {
 
 function ListingRow({ listing }: { listing: MyListing }) {
   const status = statusStyle[listing.status];
-  const kind = listing.kind === 'TEACHER' ? 'teacher' : 'center';
-  const symbol = symbolFor(listing.kind === 'TEACHER' ? 'TEACHER' : 'CITY_CENTER');
+  const meta = kindMeta[listing.kind];
 
   return (
     <div className="rounded-xl border border-border bg-white p-5 shadow-card">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.16em]" style={{ color: symbol.color }}>
-            {listing.kind === 'TEACHER' ? 'Teacher' : 'Place'}
+          <p className="text-xs font-semibold uppercase tracking-[0.16em]" style={{ color: meta.color }}>
+            {meta.label}
           </p>
           <p className="mt-1 font-display text-xl">{listing.name}</p>
-          <p className="text-sm text-muted">{listing.cityName}</p>
+          {listing.cityName && <p className="text-sm text-muted">{listing.cityName}</p>}
         </div>
         <span className={`inline-flex items-center gap-1.5 rounded-pill px-3 py-1 text-xs font-semibold ${status.className}`}>
           <status.icon size={14} /> {status.label}
@@ -105,9 +114,9 @@ function ListingRow({ listing }: { listing: MyListing }) {
       )}
       <div className="mt-4 flex gap-4 text-sm font-semibold">
         {listing.status === 'APPROVED' ? (
-          <Link to={`/${kind}/${listing.slug}`} className="text-saffron-dark hover:text-saffron">View public page</Link>
+          <Link to={meta.publicHref(listing)} className="text-saffron-dark hover:text-saffron">View public page</Link>
         ) : (
-          <Link to={`/join/${kind}/${listing.id}`} className="text-saffron-dark hover:text-saffron">
+          <Link to={meta.editHref(listing)} className="text-saffron-dark hover:text-saffron">
             {listing.status === 'REJECTED' ? 'Fix and resubmit' : 'Edit while waiting'}
           </Link>
         )}

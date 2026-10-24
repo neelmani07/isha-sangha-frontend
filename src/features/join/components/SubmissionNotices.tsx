@@ -1,6 +1,13 @@
 import { AlertTriangle, Clock } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import type { MyListing } from '../api/joinApi';
+import type { ListingKind, MyListing } from '../api/joinApi';
+
+const afterReview: Record<ListingKind, string> = {
+  TEACHER: 'Once your proof is checked, it will appear on the map with a verified badge.',
+  CENTER: 'Once your proof is checked, it will appear on the map with a verified badge.',
+  INITIATIVE: 'Once approved, it will appear on the Initiatives page and supporters can reach you directly.',
+  RESOURCE: 'Once approved, it will appear in the Resources library.',
+};
 
 export function SubmittedNotice({ listing }: { listing: MyListing }) {
   return (
@@ -9,8 +16,9 @@ export function SubmittedNotice({ listing }: { listing: MyListing }) {
         <Clock size={22} /> Waiting for review
       </p>
       <p className="mt-3 text-[15px] leading-relaxed text-ink/80">
-        <strong>{listing.name}</strong> in {listing.cityName} has been sent to our volunteer reviewers. Once your proof is checked it
-        will appear on the map with a verified badge. If anything needs changing, you'll see the reason on your listings page.
+        <strong>{listing.name}</strong>
+        {listing.cityName ? ` in ${listing.cityName}` : ''} has been sent to our volunteer reviewers. {afterReview[listing.kind]} If
+        anything needs changing, you'll see the reason on your listings page.
       </p>
       <Link
         to="/me"

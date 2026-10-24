@@ -68,7 +68,8 @@ export const teachingModeLabel: Record<TeachingMode, string> = {
 export const nav = {
   explore: 'Explore',
   stories: 'Stories',
-  initiatives: 'Your Initiatives',
+  initiatives: 'Initiatives',
+  resources: 'Resources',
   donate: 'Donate',
   join: 'Join the map',
   myProfile: 'My profile & listings',

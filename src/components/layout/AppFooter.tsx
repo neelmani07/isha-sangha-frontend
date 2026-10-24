@@ -18,7 +18,8 @@ const columns = [
     title: 'Community',
     links: [
       { to: '/stories', label: 'Stories' },
-      { to: '/initiatives', label: 'Your Initiatives' },
+      { to: '/initiatives', label: 'Initiatives' },
+      { to: '/resources', label: 'Resources' },
       { to: '/join', label: 'Join the map' },
       { to: '/donate', label: 'Donate' },
       { to: '/feedback', label: 'Feedback' },

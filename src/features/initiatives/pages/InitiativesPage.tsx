@@ -1,21 +1,28 @@
-import { List, Map as MapIcon } from 'lucide-react';
+import { useQuery } from '@tanstack/react-query';
+import { List, Map as MapIcon, PenLine } from 'lucide-react';
 import { useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Ornament } from '../../../components/brand/Ornament';
 import { ClosingBand } from '../../../components/layout/ClosingBand';
 import { BackdropPhoto } from '../../../components/ui/BackdropPhoto';
-import { ContributeButton } from '../../../components/ui/ContributeButton';
-import { SampleNotice } from '../../../components/ui/SampleNotice';
 import { TwoToneHeading } from '../../../components/ui/TwoToneHeading';
 import { sitePhotos } from '../../../content/sitePhotos';
 import { InitiativeRow } from '../components/InitiativeRow';
 import { InitiativesMap } from '../components/InitiativesMap';
-import {
-  helpGroups,
-  initiativeKinds,
-  sampleInitiatives,
-  type HelpGroup,
-  type InitiativeKind,
-} from '../data/sampleInitiatives';
+import type { InitiativeKind } from '../../../types/api';
+import { initiativesApi } from '../api/initiativesApi';
+import { helpGroups, initiativeKinds, type HelpGroup } from '../labels';
+
+function ListInitiativeLink({ className = '' }: { className?: string }) {
+  return (
+    <Link
+      to="/join/initiative"
+      className={`inline-flex items-center gap-2 rounded-md bg-saffron px-5 py-3 text-sm font-semibold text-cream shadow-card transition hover:bg-saffron-dark ${className}`}
+    >
+      <PenLine size={16} /> List your initiative
+    </Link>
+  );
+}
 
 const steps = [
   { title: 'List it', text: 'Describe your venture or seva, where it happens and what would help it grow.' },
@@ -28,22 +35,22 @@ export function InitiativesPage() {
   const [kind, setKind] = useState<InitiativeKind | 'ALL'>('ALL');
   const [view, setView] = useState<'list' | 'map'>('list');
 
+  const listQuery = useQuery({ queryKey: ['initiatives'], queryFn: initiativesApi.list });
+  const statsQuery = useQuery({ queryKey: ['initiative-stats'], queryFn: initiativesApi.stats });
+
   const initiatives = useMemo(() => {
     const needs = helpGroups.find((group) => group.value === help)?.needs ?? [];
-    return sampleInitiatives.filter(
+    return (listQuery.data ?? []).filter(
       (item) =>
         (kind === 'ALL' || item.kind === kind) && (needs.length === 0 || item.needs.some((need) => needs.includes(need))),
     );
-  }, [help, kind]);
+  }, [help, kind, listQuery.data]);
 
-  const stats = useMemo(
-    () => [
-      { value: sampleInitiatives.length, label: 'initiatives' },
-      { value: sampleInitiatives.reduce((sum, item) => sum + item.supporters, 0), label: 'supporters' },
-      { value: new Set(sampleInitiatives.map((item) => item.place.slug)).size, label: 'places' },
-    ],
-    [],
-  );
+  const stats = [
+    { value: statsQuery.data?.initiatives ?? 0, label: 'initiatives' },
+    { value: statsQuery.data?.supporters ?? 0, label: 'supporters' },
+    { value: statsQuery.data?.places ?? 0, label: 'places' },
+  ];
 
   return (
     <main className="font-body text-ink">
@@ -52,14 +59,10 @@ export function InitiativesPage() {
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-teal-deep via-teal-deep/75 to-transparent md:via-teal-deep/40" />
         <div className="mx-auto max-w-6xl px-4 pb-36 pt-14 sm:px-6 sm:pt-24 lg:px-8">
           <div className="max-w-xl">
-            <div className="[&>p]:border-cream/20 [&>p]:bg-cream/10 [&>p]:text-cream/80">
-              <SampleNotice>Preview with sample initiatives</SampleNotice>
-            </div>
             <TwoToneHeading
               as="h1"
               size="lg"
               tone="light"
-              className="mt-6"
               title="Your Initiatives"
               subtitle="seva and ventures started by people like you"
             />
@@ -68,11 +71,7 @@ export function InitiativesPage() {
               and what kind of support would help.
             </p>
             <div className="mt-8">
-              <ContributeButton
-                tone="light"
-                label="List your initiative"
-                comingSoonText="Listings open soon. We'll let you know as soon as you can add yours."
-              />
+              <ListInitiativeLink />
             </div>
           </div>
         </div>
@@ -147,7 +146,9 @@ export function InitiativesPage() {
         </div>
 
         <p className="mt-6 text-sm text-muted">
-          {initiatives.length === 0
+          {listQuery.isLoading
+            ? 'Loading…'
+            : initiatives.length === 0
             ? 'No initiatives match these filters yet. Try another way to help.'
             : `${initiatives.length} initiative${initiatives.length === 1 ? '' : 's'}`}
         </p>
@@ -189,13 +190,7 @@ export function InitiativesPage() {
         title="Like Nandi"
         subtitle="patient, present, ready to serve"
         text="Your initiative doesn't need to be big. A Sunday class, a few saplings, an evening with an elder. List it, and the people who want to help will find you."
-        action={
-          <ContributeButton
-            tone="light"
-            label="List your initiative"
-            comingSoonText="Listings open soon. We'll let you know as soon as you can add yours."
-          />
-        }
+        action={<ListInitiativeLink />}
       />
     </main>
   );

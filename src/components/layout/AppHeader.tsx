@@ -1,4 +1,5 @@
-import { BookHeart, Globe2, HandCoins, Lightbulb, LogOut, MapPinPlus, Menu, UserRound, X } from 'lucide-react';
+import { BookHeart, Globe2, HandCoins, Library, Lightbulb, LogOut, MapPinPlus, Menu, UserRound, X } from 'lucide-react';
+import { nav } from '../../content/copy';
 import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../../features/auth/context/AuthContext';
@@ -9,10 +10,11 @@ import { IshaWorldLogo, SiteWordmark } from '../brand/IshaWorldLogo';
 const explorePrefixes = ['/nearby', '/search', '/city', '/teacher', '/center'];
 
 const navItems = [
-  { to: '/', label: 'Explore', icon: Globe2, isActive: (path: string) => path === '/' || explorePrefixes.some((p) => path.startsWith(p)) },
-  { to: '/stories', label: 'Stories', icon: BookHeart, isActive: (path: string) => path.startsWith('/stories') },
-  { to: '/initiatives', label: 'Your Initiatives', icon: Lightbulb, isActive: (path: string) => path.startsWith('/initiatives') },
-  { to: '/donate', label: 'Donate', icon: HandCoins, isActive: (path: string) => path.startsWith('/donate') },
+  { to: '/', label: nav.explore, icon: Globe2, isActive: (path: string) => path === '/' || explorePrefixes.some((p) => path.startsWith(p)) },
+  { to: '/stories', label: nav.stories, icon: BookHeart, isActive: (path: string) => path.startsWith('/stories') },
+  { to: '/initiatives', label: nav.initiatives, icon: Lightbulb, isActive: (path: string) => path.startsWith('/initiatives') },
+  { to: '/resources', label: nav.resources, icon: Library, isActive: (path: string) => path.startsWith('/resources') },
+  { to: '/donate', label: nav.donate, icon: HandCoins, isActive: (path: string) => path.startsWith('/donate') },
 ];
 
 // Donate is rendered as a call-to-action button, not a plain tab.
@@ -20,7 +22,13 @@ const tabItems = navItems.filter((item) => item.to !== '/donate');
 
 /** Pages that open with a dark, full-bleed header: the top bar floats over them until the visitor scrolls. */
 export function isOverlayRoute(path: string) {
-  return path === '/' || path.startsWith('/stories') || path.startsWith('/initiatives') || path.startsWith('/donate');
+  return (
+    path === '/' ||
+    path.startsWith('/stories') ||
+    path.startsWith('/initiatives') ||
+    path.startsWith('/donate') ||
+    path === '/resources'
+  );
 }
 
 export function AppHeader() {

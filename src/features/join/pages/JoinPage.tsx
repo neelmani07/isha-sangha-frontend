@@ -1,4 +1,4 @@
-import { ArrowRight, Building2, GraduationCap, Sparkles } from 'lucide-react';
+import { ArrowRight, Building2, GraduationCap, Lightbulb, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { symbols } from '../../../components/maps/mapSymbols';
 import { useAuth } from '../../auth/context/AuthContext';
@@ -28,6 +28,14 @@ const paths = [
     title: 'I run a centre, temple or shop',
     text: 'Add an Isha centre, a Devi temple or an Isha shop with its address, hours and contacts.',
     note: 'Needs proof such as a letter from Isha. Reviewed before it appears.',
+  },
+  {
+    to: '/join/initiative',
+    icon: Lightbulb,
+    color: '#0b4a63',
+    title: 'I started an initiative',
+    text: 'Seva, a class or a venture: tell people what you are building and how they can help.',
+    note: 'Reviewed before it appears. Supporters reach you directly.',
   },
 ];
 

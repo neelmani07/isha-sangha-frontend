@@ -1,3 +1,4 @@
+import { useQuery } from '@tanstack/react-query';
 import { ArrowRight, Building2, HandCoins, Search, Users } from 'lucide-react';
 import { useCallback, useEffect, useState, type FormEvent, type ReactNode } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -9,7 +10,7 @@ import { sitePhotos, type SitePhoto } from '../../../content/sitePhotos';
 import { TwoToneHeading } from '../../../components/ui/TwoToneHeading';
 import { GlobeExplorer } from '../../globe/components/GlobeExplorer';
 import { InitiativeCard } from '../../initiatives/components/InitiativeCard';
-import { sampleInitiatives } from '../../initiatives/data/sampleInitiatives';
+import { initiativesApi } from '../../initiatives/api/initiativesApi';
 import { NearbyPanel } from '../../nearby/components/NearbyPanel';
 import { StoryCard } from '../../stories/components/StoryCard';
 import { sampleStories } from '../../stories/data/sampleStories';
@@ -18,6 +19,7 @@ import { pages } from '../../../content/copy';
 /** Explore is one long page: globe hero, then Near me, Search & browse, and community stories. */
 export function ExplorePage() {
   const location = useLocation();
+  const latestInitiatives = useQuery({ queryKey: ['initiatives'], queryFn: initiativesApi.list });
 
   const jumpTo = useCallback((sectionId: string) => {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -80,7 +82,7 @@ export function ExplorePage() {
         paper
       >
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {sampleInitiatives.slice(0, 3).map((initiative) => (
+          {(latestInitiatives.data ?? []).slice(0, 3).map((initiative) => (
             <InitiativeCard key={initiative.slug} initiative={initiative} />
           ))}
         </div>

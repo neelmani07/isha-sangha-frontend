@@ -1,5 +1,5 @@
 import { apiAdminBlob, apiDelete, apiGet, apiPost, apiPut, type PageResponse, setAdminToken } from '../../../api/apiClient';
-import type { Center, City, Country, Program, Teacher } from '../../../types/api';
+import type { Center, City, Country, Initiative, Program, ResourceLink, Teacher } from '../../../types/api';
 import type { ListingKind, ListingStatus } from '../../join/api/joinApi';
 
 export type ReviewItem = {
@@ -12,6 +12,8 @@ export type ReviewItem = {
   rejectionReason: string | null;
   teacher: Teacher | null;
   center: Center | null;
+  initiative: Initiative | null;
+  resource: ResourceLink | null;
 };
 
 type LoginResponse = {

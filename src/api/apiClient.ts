@@ -3,6 +3,12 @@ const API_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:8080/api/v1';
 const ADMIN_TOKEN_KEY = 'isha-world-admin-token';
 const USER_TOKEN_KEY = 'isha-world-user-token';
 
+/** Turns a media path from the API (e.g. "/api/v1/images/…") into a full URL; leaves other URLs alone. */
+export function mediaUrl(url: string | null | undefined) {
+  if (!url) return null;
+  return url.startsWith('/api/') ? `${new URL(API_URL).origin}${url}` : url;
+}
+
 export type ApiResponse<T> = {
   success: boolean;
   data: T;
