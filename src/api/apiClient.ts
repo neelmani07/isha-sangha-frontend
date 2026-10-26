@@ -1,4 +1,5 @@
-const API_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:8080/api/v1';
+// Set VITE_API_URL when building for production (e.g. https://api.example.org/api/v1).
+const API_URL = import.meta.env.VITE_API_URL ?? (import.meta.env.DEV ? 'http://localhost:8080/api/v1' : '/api/v1');
 
 const ADMIN_TOKEN_KEY = 'isha-world-admin-token';
 const USER_TOKEN_KEY = 'isha-world-user-token';
