@@ -7,8 +7,8 @@ import { Card } from '../../../components/ui/Card';
 
 export function AdminLoginPage() {
   const navigate = useNavigate();
-  const [email, setEmail] = useState('admin@ishaworld.local');
-  const [password, setPassword] = useState('admin123');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
 
   async function submit(event: FormEvent<HTMLFormElement>) {
@@ -32,7 +32,7 @@ export function AdminLoginPage() {
           </p>
           <div className="mt-6 grid gap-3">
             <FormField label="Email">
-              <Input value={email} onChange={(event) => setEmail(event.target.value)} type="email" placeholder="Email" />
+              <Input value={email} onChange={(event) => setEmail(event.target.value)} type="email" placeholder="Email" autoComplete="username" required />
             </FormField>
             <FormField label="Password">
               <Input
@@ -40,6 +40,8 @@ export function AdminLoginPage() {
                 onChange={(event) => setPassword(event.target.value)}
                 type="password"
                 placeholder="Password"
+                autoComplete="current-password"
+                required
               />
             </FormField>
             <Button type="submit" className="w-full">
