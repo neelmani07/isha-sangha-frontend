@@ -13,6 +13,8 @@ export type SiteConfig = {
   };
   disclaimer: string;
   googleClientId: string | null;
+  /** True while the site shows preview sample data. */
+  sampleData: boolean;
 };
 
 // Used until the backend answers (or if it is unreachable), so the shell always renders.
@@ -24,6 +26,7 @@ const fallbackSiteConfig: SiteConfig = {
   disclaimer:
     'This is an independent volunteer community. It is not affiliated with, endorsed by, or operated by Isha Foundation.',
   googleClientId: null,
+  sampleData: false,
 };
 
 export function useSiteConfig() {

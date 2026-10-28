@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { AppFooter } from '../components/layout/AppFooter';
 import { AppHeader, isOverlayRoute } from '../components/layout/AppHeader';
+import { SampleDataNotice } from '../components/layout/SampleDataNotice';
 
 export function PublicLayout() {
   const location = useLocation();
@@ -21,6 +22,7 @@ export function PublicLayout() {
         <Outlet />
       </div>
       <AppFooter />
+      <SampleDataNotice />
     </div>
   );
 }
