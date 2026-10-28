@@ -20,7 +20,7 @@ export function SampleDataNotice() {
   if (!sampleData || closed) return null;
 
   return (
-    <div role="status" className="fixed inset-x-0 bottom-0 z-40 flex justify-center px-4 pb-4 pointer-events-none">
+    <div role="status" className="fixed inset-x-0 bottom-[var(--tabbar-h)] z-40 flex justify-center px-4 pb-4 pointer-events-none">
       <div className="pointer-events-auto flex max-w-xl items-start gap-3 rounded-lg bg-ink/90 px-4 py-3 text-sm text-cream shadow-panel backdrop-blur">
         <Info size={18} className="mt-0.5 shrink-0 text-gold-light" />
         <p className="leading-snug">
