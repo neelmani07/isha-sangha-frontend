@@ -9,7 +9,7 @@ import { IshaWorldLogo, SiteWordmark } from '../brand/IshaWorldLogo';
 // Everything that belongs to the Explore section (globe, nearby, search and detail pages).
 const explorePrefixes = ['/nearby', '/search', '/city', '/teacher', '/center'];
 
-const navItems = [
+export const navItems = [
   { to: '/', label: nav.explore, icon: Globe2, isActive: (path: string) => path === '/' || explorePrefixes.some((p) => path.startsWith(p)) },
   { to: '/stories', label: nav.stories, icon: BookHeart, isActive: (path: string) => path.startsWith('/stories') },
   { to: '/initiatives', label: nav.initiatives, icon: Lightbulb, isActive: (path: string) => path.startsWith('/initiatives') },

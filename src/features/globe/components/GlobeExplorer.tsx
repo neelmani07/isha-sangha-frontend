@@ -215,7 +215,7 @@ export function GlobeExplorer({ onJumpToSection }: GlobeExplorerProps) {
     <section
       id="globe"
       aria-label="Globe explorer"
-      className="relative h-[calc(82svh+var(--header-h))] min-h-[640px] overflow-hidden font-body text-cream lg:h-[100svh] lg:min-h-[700px]"
+      className="relative h-[calc(82svh+var(--header-h)-var(--tabbar-h))] min-h-[576px] overflow-hidden font-body text-cream lg:h-[100svh] lg:min-h-[700px]"
     >
       <NightSky />
       <BackdropPhoto photo={sitePhotos.velliangiriMist} variant="horizon" position="center 40%" className="opacity-[0.22] mix-blend-luminosity" />

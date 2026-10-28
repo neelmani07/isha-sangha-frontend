@@ -4,6 +4,8 @@
 
 :root {
   --header-h: 72px;
+  /* Height of the bottom tab bar on phones (MobileTabBar); 0 from tablet width up, where it is hidden. */
+  --tabbar-h: calc(4rem + env(safe-area-inset-bottom, 0px));
   color: #28231e;
   background: #f9f6f1;
   font-family: 'Source Sans 3', system-ui, sans-serif;
@@ -16,6 +18,13 @@
 @media (min-width: 640px) {
   :root {
     --header-h: 80px;
+  }
+}
+
+/* Same breakpoint as Tailwind's md:, where the top menu shows its links and the tab bar hides. */
+@media (min-width: 768px) {
+  :root {
+    --tabbar-h: 0px;
   }
 }
 

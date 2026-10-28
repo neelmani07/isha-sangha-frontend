@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { AppFooter } from '../components/layout/AppFooter';
 import { AppHeader, isOverlayRoute } from '../components/layout/AppHeader';
+import { MobileTabBar } from '../components/layout/MobileTabBar';
 import { SampleDataNotice } from '../components/layout/SampleDataNotice';
 
 export function PublicLayout() {
@@ -12,8 +13,9 @@ export function PublicLayout() {
     if (!location.hash) window.scrollTo(0, 0);
   }, [location.pathname, location.hash]);
 
+  // Bottom padding keeps the footer clear of the phone tab bar (0 on larger screens).
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col pb-[var(--tabbar-h)]">
       <AppHeader />
       {/* The header is fixed; light pages get a spacer, dark-header pages slide underneath it. */}
       {!isOverlayRoute(location.pathname) && <div className="h-[var(--header-h)] shrink-0" aria-hidden />}
@@ -23,6 +25,7 @@ export function PublicLayout() {
       </div>
       <AppFooter />
       <SampleDataNotice />
+      <MobileTabBar />
     </div>
   );
 }
